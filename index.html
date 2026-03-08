@@ -15,6 +15,17 @@
       --primary-soft:#edf3ff;
       --gray-soft:#f8fafc;
       --warn:#9a3412;
+      
+      /* Design System Tokens */
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --touch-target: 48px;
+      --text-base: 16px;
+      --text-lg: 18px;
+      --color-border: #e5e7eb;
+      --color-surface-muted: #f8fafc;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -74,33 +85,116 @@
     .tag.important{background:#eef3ff;color:#1e40af}
     .map-btn{display:inline-block;border:1px solid #cfd9ef;background:#fff;color:#1f4fd6;border-radius:10px;padding:8px 12px;font-size:.9rem;font-weight:900;text-decoration:none}
 
-    details.acc{margin-top:8px;border:1px solid #dfe5ef;border-radius:10px;background:#f8fbff;overflow:hidden}
-    details.acc summary{
-      list-style:none;
-      cursor:pointer;
-      padding:11px 12px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      font-size:.9rem;
-      font-weight:900;
-      color:#334155;
-      background:#f8fbff;
+    /* --- 여행팁 섹션 스타일 --- */
+    .tip-quick {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
     }
-    details.acc summary::-webkit-details-marker{display:none}
-    details.acc summary::after{content:'▾';font-size:.9rem;transition:transform .2s ease;color:#64748b}
-    details.acc[open] summary{background:#eef3ff;color:#1e3a8a}
-    details.acc[open] summary::after{transform:rotate(180deg);color:#1e3a8a}
-    .acc-body{padding:0 12px 10px;background:#fff}
-    .acc-body ul{margin:0;padding-left:16px;display:grid;gap:5px;font-size:.86rem;color:#475569;font-weight:700}
+    .tip-box {
+      background: var(--primary-soft);
+      border: 1px solid #d9e4fb;
+      border-radius: 12px;
+      padding: var(--space-4);
+    }
+    .tip-box b {
+      display: block;
+      font-size: var(--text-base);
+      color: #1e40af;
+      margin-bottom: 4px;
+    }
+    .tip-box span {
+      font-size: var(--text-base);
+      color: var(--text);
+      font-weight: 700;
+      line-height: 1.5;
+    }
 
-    .tip-quick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
-    .tip-box{border:1px solid #e2e8f0;background:#f8fafc;border-radius:11px;padding:9px}
-    .tip-box b{display:block;font-size:.85rem;margin-bottom:2px}
-    .tip-box span{font-size:.84rem;color:#475569;font-weight:700}
+    details.acc {
+      margin-bottom: var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      background: #ffffff;
+      overflow: hidden;
+    }
+    details.acc summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 0 var(--space-4);
+      min-height: var(--touch-target);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: var(--text-lg);
+      font-weight: 900;
+      color: var(--text);
+      background: var(--color-surface-muted);
+    }
+    details.acc summary::-webkit-details-marker { display: none; }
+    details.acc summary::after {
+      content: '▾';
+      font-size: 1.2rem;
+      transition: transform 0.2s ease;
+      color: var(--muted);
+    }
+    details.acc[open] summary {
+      background: #eef3ff;
+      color: #1e3a8a;
+      border-bottom: 1px solid #d9e4fb;
+    }
+    details.acc[open] summary::after {
+      transform: rotate(180deg);
+      color: #1e3a8a;
+    }
+    .acc-body {
+      padding: var(--space-4);
+      background: #ffffff;
+    }
+    .acc-body ul {
+      margin: 0;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      font-size: var(--text-base);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-    .check{display:flex;gap:8px;align-items:flex-start;border:1px solid #e5e9f2;border-radius:10px;padding:9px;margin:6px 0;background:#fcfdff}
-    .check input{width:26px;height:26px;flex:0 0 auto;margin-top:1px}
+    .acc-body .check-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .check {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      min-height: var(--touch-target);
+      padding: 0 var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      background: #ffffff;
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+    .check:active {
+      background: var(--color-surface-muted);
+    }
+    .check input[type="checkbox"] {
+      width: 24px;
+      height: 24px;
+      flex: 0 0 auto;
+      margin: 0;
+      accent-color: var(--primary);
+    }
+    .check span {
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.4;
+    }
 
     .bottom-nav{
       position:fixed;left:0;right:0;bottom:0;z-index:50;
@@ -169,45 +263,99 @@
     </section>
 
     <section id="section-tips" class="card">
-      <h2>여행팁</h2>
+      <h2 style="margin-bottom: 16px;">여행팁</h2>
+      
       <div class="tip-quick">
-        <article class="tip-box"><b>빠른 팁 1</b><span>작은돈(10,000동/20,000동/50,000동) 따로 보관</span></article>
-        <article class="tip-box"><b>빠른 팁 2</b><span>마사지 팁은 보통 50,000동</span></article>
+        <article class="tip-box">
+          <b>💡 빠른 팁 1</b>
+          <span>작은돈(1만동/2만동/5만동)은 헷갈리지 않게 따로 보관하세요.</span>
+        </article>
+        <article class="tip-box">
+          <b>💡 빠른 팁 2</b>
+          <span>마사지 팁은 보통 50,000동(약 2,700원)입니다.</span>
+        </article>
       </div>
 
       <details class="acc">
-        <summary>Grab 이용 팁</summary>
-        <div class="acc-body"><ul><li>공항에서는 Grab 또는 공식 택시 승강장 이용</li><li>차량번호 확인 후 탑승</li><li>4명+캐리어면 7인승 차량이 편함</li></ul></div>
+        <summary>Grab(택시) 이용 팁</summary>
+        <div class="acc-body">
+          <ul>
+            <li>공항에서는 무조건 Grab 또는 공식 승강장을 이용하세요.</li>
+            <li>탑승 전 <b>차량번호</b>를 반드시 확인하세요.</li>
+            <li>4명+캐리어가 있다면 넓은 7인승 차량이 편합니다.</li>
+          </ul>
+        </div>
       </details>
 
       <details class="acc">
-        <summary>쇼핑 팁</summary>
-        <div class="acc-body"><ul><li>처음 가격의 50%~70%부터 흥정 시작</li><li>너무 마음에 들면 70%~80% 선에서 마무리 가능</li><li>야시장은 30~40분만 짧게 보기</li></ul></div>
+        <summary>쇼핑 팁 (흥정하기)</summary>
+        <div class="acc-body">
+          <ul>
+            <li>처음 부른 가격의 <b>50%~70%</b>부터 흥정을 시작하세요.</li>
+            <li>너무 마음에 들면 70%~80% 선에서 마무리해도 좋습니다.</li>
+            <li>야시장은 복잡하므로 30~40분만 짧게 구경하세요.</li>
+          </ul>
+        </div>
       </details>
 
       <details class="acc">
         <summary>마사지 팁</summary>
-        <div class="acc-body"><ul><li>강도는 soft 또는 medium 먼저 요청</li><li>저녁 시간대는 예약 권장</li><li>Tip Included 표시가 있으면 추가 팁 생략 가능</li></ul></div>
-      </details>
-
-      <details class="acc">
-        <summary>준비물</summary>
-        <div class="acc-body"><ul><li>여권 / 예약 확인서 / 지도 캡처</li><li>모자 / 선글라스 / 선크림 / 물</li><li>비상약 / 충전기 / 보조배터리</li></ul></div>
-      </details>
-
-      <details class="acc">
-        <summary>주의사항</summary>
-        <div class="acc-body"><ul><li>밤늦은 외진 길 피하기</li><li>가방은 앞으로 메고 지갑은 안쪽에 보관</li><li>길 건널 때는 천천히 일정한 속도로 걷기</li></ul></div>
-      </details>
-
-      <details class="acc">
-        <summary>체크리스트</summary>
         <div class="acc-body">
-          <label class="check"><input type="checkbox" data-check="before_passport"><span>여권 / 예약 확인서 확인</span></label>
-          <label class="check"><input type="checkbox" data-check="before_grab"><span>Grab 앱 / 결제수단 / 지도 캡처</span></label>
-          <label class="check"><input type="checkbox" data-check="morning_water"><span>매일 아침 물 / 모자 / 선크림 / 작은돈</span></label>
-          <label class="check"><input type="checkbox" data-check="morning_route"><span>첫 목적지 지도 열기 / 이동 시간 확인</span></label>
-          <label class="check"><input type="checkbox" data-check="resort_checkout"><span>Day3 체크아웃 짐 정리 / 분실물 확인</span></label>
+          <ul>
+            <li>강도는 살살(Soft) 또는 중간(Medium)으로 먼저 요청하세요.</li>
+            <li>사람이 많은 저녁 시간대는 예약을 권장합니다.</li>
+            <li>'Tip Included(팁 포함)' 표시가 있으면 팁을 안 주셔도 됩니다.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>가방 준비물</summary>
+        <div class="acc-body">
+          <ul>
+            <li>여권 / 예약 확인서 / 일정표 지도 캡처본</li>
+            <li>모자 / 선글라스 / 선크림 / 마실 물</li>
+            <li>비상약 / 핸드폰 충전기 / 보조배터리</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>외출 주의사항</summary>
+        <div class="acc-body">
+          <ul>
+            <li>밤늦게 외진 골목길은 피하세요.</li>
+            <li>가방은 앞으로 메고, 지갑은 가방 안쪽에 보관하세요.</li>
+            <li>오토바이가 많으니 길 건널 때는 뛰지 말고 천천히 일정한 속도로 건너세요.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc" open>
+        <summary>매일 외출 전 체크리스트</summary>
+        <div class="acc-body">
+          <div class="check-list">
+            <label class="check">
+              <input type="checkbox" data-check="before_passport">
+              <span>여권 및 예약 확인서 챙기기</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" data-check="before_grab">
+              <span>Grab 앱 결제수단 확인 / 지도 캡처</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" data-check="morning_water">
+              <span>마실 물 / 모자 / 선크림 / 비상금(작은돈) 챙기기</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" data-check="morning_route">
+              <span>오늘 첫 목적지 지도 열어두기</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" data-check="resort_checkout">
+              <span>(Day3) 숙소 이동 전 빠진 물건 없는지 확인</span>
+            </label>
+          </div>
         </div>
       </details>
     </section>
@@ -234,9 +382,9 @@
           {k:'메모',v:'컨디션 회복 우선'}
         ],
         items:[
-          {time:'03:30',place:'나트랑 도착 (Cam Ranh 공항)',line:'입국 후 바로 차량 탑승 준비',tags:['도착'],map:'https://maps.google.com/?q=Cam+Ranh+International+Airport',details:['새벽 도착은 버스보다 택시/Grab이 덜 피곤합니다.']},
-          {time:'04:30',place:'공항 → 인터컨티넨탈 이동',line:'Grab 약 40분',tags:['이동','Grab','핵심'],important:true,map:'https://maps.google.com/?q=Intercontinental+Nha+Trang',details:['Grab 또는 공식 택시 이용','4명+캐리어면 큰 차 추천','호텔 이름보다 지도 핀 보여주기']},
-          {time:'05:30',place:'호텔 체크인 후 취침',line:'전날 1박 예약이면 바로 쉬기 편함',tags:['숙소'],map:'https://maps.google.com/?q=Intercontinental+Nha+Trang',details:['체력 회복을 최우선으로 두세요.']}
+          {time:'03:30',place:'나트랑 도착 (Cam Ranh 공항)',line:'입국 후 바로 차량 탑승 준비',tags:['도착'],map:'https://maps.google.com/?q=Cam+Ranh+International+Airport',details:['새벽 도착은 버스보다 택시/Grab이 덜 피곤합니다.'},
+          {time:'04:30',place:'공항 → 인터컨티넨탈 이동',line:'Grab 약 40분',tags:['이동','Grab','핵심'],important:true,map:'https://maps.google.com/?q=Intercontinental+Nha+Trang',details:['Grab 또는 공식 택시 이용','4명+캐리어면 큰 차 추천','호텔 이름보다 지도 핀 보여주기'},
+          {time:'05:30',place:'호텔 체크인 후 취침',line:'전날 1박 예약이면 바로 쉬기 편함',tags:['숙소'],map:'https://maps.google.com/?q=Intercontinental+Nha+Trang',details:['체력 회복을 최우선으로 두세요.'}
         ]
       },
       day1: {
@@ -249,12 +397,12 @@
           {k:'저녁',v:'20:00 야시장 30~40분'}
         ],
         items:[
-          {time:'10:30',place:'기상 & 준비',line:'천천히 준비하고 이동 최소화',tags:['휴식'],map:'https://maps.google.com/?q=Intercontinental+Nha+Trang',details:['첫날은 과하게 움직이지 않기']},
-          {time:'12:00',place:'짜오마오1 점심 (Chào Mào)',line:'1인 35,000동~250,000동',tags:['식사','대표메뉴'],map:'https://maps.google.com/?q=Chao+Mao+Nha+Trang',details:['영업: 보통 11:00~22:00 (일부 브레이크 11:30~15:00 / 17:30~21:30)','4명이면 메인 3~4개 먼저 주문']},
-          {time:'16:00',place:'니에나 네일',line:'젤 250,000동~400,000동 / 약 1시간',tags:['네일'],map:'https://maps.google.com/?q=Niena+Nails+Nha+Trang',details:['디자인 사진 미리 저장해서 보여주기']},
-          {time:'17:30',place:'Onsi Spa 마사지',line:'발 250,000동 / 전신 350,000동~450,000동',tags:['마사지','핵심'],important:true,map:'https://maps.google.com/?q=Onsi+Spa+Nha+Trang',details:['강도는 soft 또는 medium 요청','예약 추천','팁은 보통 50,000동 (Tip Included면 생략)']},
-          {time:'18:30',place:'꽌옥응엉 저녁',line:'보통 50,000동~150,000동 / 접시',tags:['해산물'],map:'https://maps.google.com/?q=Quan+Oc+Ngon+Nha+Trang',details:['4명 기준 5~6접시 + 볶음밥','추천 메뉴는 현장 인기 메뉴 위주로 주문']},
-          {time:'20:00',place:'나트랑 야시장 (Night Market)',line:'30~40분만 짧게 둘러보기',tags:['쇼핑'],map:'https://maps.google.com/?q=Nha+Trang+Night+Market+Tran+Phu',details:['처음 가격 그대로 사지 않기','지갑은 안쪽, 가방은 앞으로 메기']}
+          {time:'10:30',place:'기상 & 준비',line:'천천히 준비하고 이동 최소화',tags:['휴식'],map:'https://maps.google.com/?q=Intercontinental+Nha+Trang',details:['첫날은 과하게 움직이지 않기'},
+          {time:'12:00',place:'짜오마오1 점심 (Chào Mào)',line:'1인 35,000동~250,000동',tags:['식사','대표메뉴'],map:'https://maps.google.com/?q=Chao+Mao+Nha+Trang',details:['영업: 보통 11:00~22:00 (일부 브레이크 11:30~15:00 / 17:30~21:30)','4명이면 메인 3~4개 먼저 주문'},
+          {time:'16:00',place:'니에나 네일',line:'젤 250,000동~400,000동 / 약 1시간',tags:['네일'],map:'https://maps.google.com/?q=Niena+Nails+Nha+Trang',details:['디자인 사진 미리 저장해서 보여주기'},
+          {time:'17:30',place:'Onsi Spa 마사지',line:'발 250,000동 / 전신 350,000동~450,000동',tags:['마사지','핵심'],important:true,map:'https://maps.google.com/?q=Onsi+Spa+Nha+Trang',details:['강도는 soft 또는 medium 요청','예약 추천','팁은 보통 50,000동 (Tip Included면 생략)'},
+          {time:'18:30',place:'꽌옥응엉 저녁',line:'보통 50,000동~150,000동 / 접시',tags:['해산물'],map:'https://maps.google.com/?q=Quan+Oc+Ngon+Nha+Trang',details:['4명 기준 5~6접시 + 볶음밥','추천 메뉴는 현장 인기 메뉴 위주로 주문'},
+          {time:'20:00',place:'나트랑 야시장 (Night Market)',line:'30~40분만 짧게 둘러보기',tags:['쇼핑'],map:'https://maps.google.com/?q=Nha+Trang+Night+Market+Tran+Phu',details:['처음 가격 그대로 사지 않기','지갑은 안쪽, 가방은 앞으로 메기'}
         ]
       },
       day2: {
@@ -267,11 +415,11 @@
           {k:'저녁',v:'18:30 저녁 후 조기 귀가'}
         ],
         items:[
-          {time:'09:00',place:'포나가르 사원',line:'입장 30,000동 / 약 1시간',tags:['관광'],map:'https://maps.google.com/?q=Po+Nagar+Cham+Towers',details:['노출 많은 옷은 입장 제한 가능']},
-          {time:'10:30',place:'혼총곶',line:'입장 22,000동 / 약 30분',tags:['관광'],map:'https://maps.google.com/?q=Hon+Chong+Promontory',details:['사진 스팟 중심으로 짧게']},
-          {time:'12:00',place:'꾸이 씨푸드 점심 (Cui Seafood)',line:'버터새우 220,000동 · 볶음밥 120,000동',tags:['식사'],map:'https://maps.google.com/?q=Cui+Seafood+Nha+Trang',details:['메인 3~4개 + 볶음밥/면 1개가 적당']},
-          {time:'14:00',place:'I-Resort 머드온천',line:'머드온천 350,000동 / 약 3시간',tags:['온천','핵심'],important:true,map:'https://maps.google.com/?q=I+Resort+Nha+Trang',details:['Private 800,000동 옵션','수건/샤워용품 제공']},
-          {time:'18:30',place:'믹스 그릭 저녁 (Mix Greek)',line:'양고기 350,000동 · 샐러드 120,000동',tags:['식사'],map:'https://maps.google.com/?q=Mix+Greek+Restaurant+Nha+Trang',details:['무리 없는 식사량 유지']}
+          {time:'09:00',place:'포나가르 사원',line:'입장 30,000동 / 약 1시간',tags:['관광'],map:'https://maps.google.com/?q=Po+Nagar+Cham+Towers',details:['노출 많은 옷은 입장 제한 가능'},
+          {time:'10:30',place:'혼총곶',line:'입장 22,000동 / 약 30분',tags:['관광'],map:'https://maps.google.com/?q=Hon+Chong+Promontory',details:['사진 스팟 중심으로 짧게'},
+          {time:'12:00',place:'꾸이 씨푸드 점심 (Cui Seafood)',line:'버터새우 220,000동 · 볶음밥 120,000동',tags:['식사'],map:'https://maps.google.com/?q=Cui+Seafood+Nha+Trang',details:['메인 3~4개 + 볶음밥/면 1개가 적당'},
+          {time:'14:00',place:'I-Resort 머드온천',line:'머드온천 350,000동 / 약 3시간',tags:['온천','핵심'],important:true,map:'https://maps.google.com/?q=I+Resort+Nha+Trang',details:['Private 800,000동 옵션','수건/샤워용품 제공'},
+          {time:'18:30',place:'믹스 그릭 저녁 (Mix Greek)',line:'양고기 350,000동 · 샐러드 120,000동',tags:['식사'],map:'https://maps.google.com/?q=Mix+Greek+Restaurant+Nha+Trang',details:['무리 없는 식사량 유지'}
         ]
       },
       day3: {
@@ -284,9 +432,9 @@
           {k:'휴식',v:'라군 비치 / 선 18:00'}
         ],
         items:[
-          {time:'10:30',place:'시내 → 아미아나 리조트 이동',line:'Grab 10~15분 / 약 100,000동',tags:['숙소이동','핵심'],important:true,map:'https://maps.google.com/?q=Amiana+Resort+Nha+Trang',details:['체크아웃 전 분실물 최종 확인']},
-          {time:'14:00',place:'아미아나 리조트 체크인',line:'체크인 전/후 시설 사용 가능 여부 확인',tags:['숙소'],map:'https://maps.google.com/?q=Amiana+Resort+Nha+Trang',details:['라군 비치 추천','선셋 18:00 확인','젖은 옷 오래 입지 않기']},
-          {time:'18:30',place:'바카로 레스토랑 저녁 (Bacaro)',line:'피자 280,000동 · 파스타 240,000동',tags:['식사'],map:'https://maps.google.com/?q=Bacaro+Amiana+Resort',details:['과식보다 가볍게 나눠 주문']}
+          {time:'10:30',place:'시내 → 아미아나 리조트 이동',line:'Grab 10~15분 / 약 100,000동',tags:['숙소이동','핵심'],important:true,map:'https://maps.google.com/?q=Amiana+Resort+Nha+Trang',details:['체크아웃 전 분실물 최종 확인'},
+          {time:'14:00',place:'아미아나 리조트 체크인',line:'체크인 전/후 시설 사용 가능 여부 확인',tags:['숙소'],map:'https://maps.google.com/?q=Amiana+Resort+Nha+Trang',details:['라군 비치 추천','선셋 18:00 확인','젖은 옷 오래 입지 않기'},
+          {time:'18:30',place:'바카로 레스토랑 저녁 (Bacaro)',line:'피자 280,000동 · 파스타 240,000동',tags:['식사'],map:'https://maps.google.com/?q=Bacaro+Amiana+Resort',details:['과식보다 가볍게 나눠 주문'}
         ]
       },
       day4: {
@@ -299,8 +447,8 @@
           {k:'마무리',v:'확정 일정 종료'}
         ],
         items:[
-          {time:'11:30',place:'쿠우쿠우 점심 (QooQoo)',line:'약 300,000동~400,000동',tags:['식사'],map:'https://maps.google.com/?q=QooQoo+Gold+Coast+Mall+Nha+Trang',details:['점심시간 웨이팅 가능']},
-          {time:'12:30',place:'롯데마트 쇼핑 (Lotte Mart)',line:'커피 120,000동 · 망고젤리 80,000동',tags:['쇼핑'],map:'https://maps.google.com/?q=Lotte+Mart+Gold+Coast+Nha+Trang',details:['작은돈 분리 보관 후 결제']}
+          {time:'11:30',place:'쿠우쿠우 점심 (QooQoo)',line:'약 300,000동~400,000동',tags:['식사'],map:'https://maps.google.com/?q=QooQoo+Gold+Coast+Mall+Nha+Trang',details:['점심시간 웨이팅 가능'},
+          {time:'12:30',place:'롯데마트 쇼핑 (Lotte Mart)',line:'커피 120,000동 · 망고젤리 80,000동',tags:['쇼핑'],map:'https://maps.google.com/?q=Lotte+Mart+Gold+Coast+Nha+Trang',details:['작은돈 분리 보관 후 결제'}
         ]
       }
     };
