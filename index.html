@@ -7,7 +7,7 @@
   <style>
     :root {
       --bg:#f4f7fb;
-      --card:#fff;
+      --card:#ffffff;
       --text:#111827;
       --muted:#6b7280;
       --line:#e5eaf3;
@@ -20,6 +20,7 @@
       --shop:#ecfdf5;
       --move:#f3f4f6;
       --stay:#fff1f2;
+      --money:#fffbeb;
     }
     *{box-sizing:border-box}
     body{
@@ -32,32 +33,27 @@
     }
     .container{max-width:980px;margin:0 auto;padding:14px 10px 40px}
     h1,h2,h3{margin:0}
-    h1{font-size:1.7rem;line-height:1.3}
-    h2{font-size:1.25rem;margin-bottom:10px}
+    h1{font-size:1.68rem;line-height:1.3}
+    h2{font-size:1.2rem;margin-bottom:10px}
 
-    .card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:16px;
-      box-shadow:var(--shadow);
-      padding:14px;
-      margin:10px 0;
-    }
-
-    .hero{border-left:5px solid var(--primary);background:linear-gradient(130deg,#edf4ff,#fff 65%)}
-    .hero p{margin:6px 0;color:#334155;font-size:.97rem}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px;margin:10px 0}
+    .hero{border-left:5px solid var(--primary);background:linear-gradient(130deg,#edf4ff,#ffffff 65%)}
+    .hero p{margin:6px 0;color:#334155;font-size:.95rem}
 
     .day-switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
-    .day-btn{
-      border:1.6px solid #c9d8ff;border-radius:10px;background:#fff;color:#1d4ed8;
-      font-weight:800;font-size:.95rem;padding:10px 6px;cursor:pointer
-    }
+    .day-btn{border:1.6px solid #c9d8ff;border-radius:10px;background:#fff;color:#1d4ed8;font-weight:800;font-size:.93rem;padding:10px 6px;cursor:pointer}
     .day-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 
     .quick-grid{display:grid;grid-template-columns:1fr;gap:8px}
     .quick-item{border:1px solid #dbe6ff;background:#f8fbff;border-radius:12px;padding:10px}
     .quick-label{font-size:.82rem;color:#1e40af;font-weight:900;margin-bottom:2px}
     .quick-value{font-size:.98rem;font-weight:800;line-height:1.4}
+
+    .money-note{font-size:.9rem;font-weight:800;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:8px 10px;margin-bottom:8px}
+    .tip-grid{display:grid;grid-template-columns:1fr;gap:8px}
+    .tip-quick{border:1px solid #fde68a;background:var(--money);border-radius:12px;padding:9px 10px}
+    .tip-quick h3{font-size:.9rem;font-weight:900;margin-bottom:4px;color:#92400e}
+    .tip-quick p{margin:0;font-size:.92rem;font-weight:800;line-height:1.4}
 
     .important{background:#f7faff;border-color:#d8e5ff}
     .important-grid{display:grid;grid-template-columns:1fr;gap:8px}
@@ -71,22 +67,21 @@
     .summary-grid{display:grid;grid-template-columns:1fr;gap:8px}
     .summary-card{border:1px solid #d9e6ff;background:var(--soft);border-radius:11px;padding:9px}
     .summary-k{font-size:.8rem;color:#1d4ed8;font-weight:900}
-    .summary-v{font-size:.95rem;font-weight:800;line-height:1.4}
+    .summary-v{font-size:.94rem;font-weight:800;line-height:1.4}
 
     .day-section{display:none}
     .day-section.visible{display:block}
     .day-head{border:1px solid var(--line);background:#f9fbff;border-radius:12px;padding:10px;margin-bottom:10px}
-    .day-title{font-size:1.06rem;font-weight:900}
-    .day-sub{font-size:.92rem;color:#4b5563;font-weight:600}
+    .day-title{font-size:1.04rem;font-weight:900}
+    .day-sub{font-size:.9rem;color:#4b5563;font-weight:600}
 
     .timeline{display:grid;gap:9px}
     .place-card{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px}
     .place-top{display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap;margin-bottom:7px}
-    .time{min-width:58px;text-align:center;padding:4px 6px;border-radius:8px;background:#edf3ff;color:#1e3a8a;font-size:.86rem;font-weight:900}
-    .name{font-size:1rem;font-weight:900;line-height:1.35;flex:1;min-width:150px}
-
+    .time{min-width:60px;text-align:center;padding:4px 6px;border-radius:8px;background:#edf3ff;color:#1e3a8a;font-size:.86rem;font-weight:900}
+    .name{font-size:.98rem;font-weight:900;line-height:1.35;flex:1;min-width:150px}
     .badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:7px}
-    .badge{display:inline-block;padding:4px 9px;border-radius:999px;font-size:.8rem;font-weight:800;border:1px solid transparent}
+    .badge{display:inline-block;padding:4px 9px;border-radius:999px;font-size:.79rem;font-weight:800;border:1px solid transparent}
     .cat-meal{background:var(--meal);color:#b45309}
     .cat-tour{background:var(--tour);color:#1d4ed8}
     .cat-spa{background:var(--spa);color:#6d28d9}
@@ -94,24 +89,24 @@
     .cat-move{background:var(--move);color:#374151}
     .cat-stay{background:var(--stay);color:#be123c}
     .badge-plain{background:#f8fafc;color:#111827;border-color:#e5e7eb}
-
-    .info{display:grid;gap:3px;font-size:.9rem;color:#374151;margin-bottom:7px}
-    .tip{border:1px solid #e6ebf2;background:#f8fafc;border-radius:9px;padding:7px 9px;font-size:.88rem;font-weight:700;color:#334155}
+    .info{display:grid;gap:3px;font-size:.89rem;color:#374151;margin-bottom:7px}
+    .tip{border:1px solid #e6ebf2;background:#f8fafc;border-radius:9px;padding:7px 9px;font-size:.86rem;font-weight:700;color:#334155}
 
     details.fold{border:1px solid var(--line);border-radius:13px;background:#fff;margin:10px 0;box-shadow:var(--shadow)}
-    details.fold summary{cursor:pointer;list-style:none;padding:12px 12px;font-weight:900;font-size:1rem}
+    details.fold summary{cursor:pointer;list-style:none;padding:12px;font-weight:900;font-size:.99rem}
     details.fold summary::-webkit-details-marker{display:none}
     details.fold .fold-body{padding:0 12px 12px}
 
-    .mini-list{margin:0;padding-left:18px;display:grid;gap:5px;font-size:.93rem;color:#374151;font-weight:600}
+    .mini-list{margin:0;padding-left:18px;display:grid;gap:6px;font-size:.92rem;color:#374151;font-weight:600}
 
     .check-item{display:flex;gap:10px;align-items:flex-start;border:1px solid #e5ebf6;background:#fcfdff;border-radius:11px;padding:10px;margin:7px 0}
     .check-item input{width:28px;height:28px;flex:0 0 auto;margin-top:1px}
-    .check-text{font-size:.98rem;font-weight:800}
+    .check-text{font-size:.96rem;font-weight:800}
 
     @media (min-width:760px){
       .day-switch{grid-template-columns:repeat(6,minmax(0,1fr))}
       .quick-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .tip-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .important-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .important-grid .full{grid-column:1/-1}
       .summary-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
@@ -122,7 +117,7 @@
   <main class="container">
     <section class="card hero">
       <h1>나트랑 부모님 여행 일정표</h1>
-      <p><strong>핵심:</strong> 지금 필요한 정보 먼저 · 하루 일정만 기본 표시 · 큰 글씨</p>
+      <p><strong>핵심:</strong> 오늘 필요한 정보 먼저 보고, 자세한 팁은 아래에서 펼쳐서 확인하세요.</p>
       <div class="day-switch" role="tablist" aria-label="일정 선택">
         <button class="day-btn active" data-day="day0" role="tab" aria-selected="true">Day0</button>
         <button class="day-btn" data-day="day1" role="tab" aria-selected="false">Day1</button>
@@ -138,14 +133,37 @@
       <div id="todayQuick" class="quick-grid"></div>
     </section>
 
+    <section class="card">
+      <h2>상단 빠른 팁 (돈 · 팁 · 흥정)</h2>
+      <div class="money-note">이 페이지의 가격은 모두 베트남 동(VND) 기준입니다.</div>
+      <div class="tip-grid">
+        <article class="tip-quick">
+          <h3>돈은 색보다 숫자 확인</h3>
+          <p><strong>10,000동 / 100,000동 / 500,000동</strong> 숫자를 꼭 확인하세요.</p>
+        </article>
+        <article class="tip-quick">
+          <h3>마사지 팁</h3>
+          <p><strong>마사지 팁은 보통 50,000동</strong>으로 생각하면 편합니다.</p>
+        </article>
+        <article class="tip-quick">
+          <h3>야시장 흥정</h3>
+          <p>처음 가격의 <strong>50% ~ 70%</strong>부터 시작, 마음에 들면 <strong>70% ~ 80%</strong> 마무리.</p>
+        </article>
+        <article class="tip-quick">
+          <h3>작은돈 준비</h3>
+          <p><strong>10,000동 / 20,000동 / 50,000동</strong>을 미리 나눠 두세요.</p>
+        </article>
+      </div>
+    </section>
+
     <section class="card important">
       <h2>중요정보 (바로 확인)</h2>
       <div id="importantText" class="important-grid">
         <div class="info-row"><div class="info-k">오늘 숙소</div><div id="todayStay" class="info-v">InterContinental Nha Trang</div></div>
         <div class="info-row"><div class="info-k">숙소 이동</div><div class="info-v">시내 ↔ 리조트 이동 1회 (Day3)</div></div>
-        <div class="info-row"><div class="info-k">공항 → 시내호텔</div><div class="info-v">Grab 약 40분 / 약 350k 동</div></div>
-        <div class="info-row"><div class="info-k">시내 → 아미아나</div><div class="info-v">Grab 10~15분 / 약 100k 동</div></div>
-        <div class="info-row" id="breakfastRow"><div class="info-k">시내 호텔 조식</div><div class="info-v">06:30~10:30 (07:00 추천)</div></div>
+        <div class="info-row"><div class="info-k">공항 → 시내호텔</div><div class="info-v">Grab 약 40분 / 약 350,000동</div></div>
+        <div class="info-row"><div class="info-k">시내 → 아미아나</div><div class="info-v">Grab 10분 ~ 15분 / 약 100,000동</div></div>
+        <div class="info-row" id="breakfastRow"><div class="info-k">시내 호텔 조식</div><div class="info-v">06:30 ~ 10:30 (07:00 추천)</div></div>
         <div class="info-row full"><div class="info-k">공항 Grab 팁</div><div class="info-v">공항 밖 기둥 번호 확인 후 호출 위치 맞추기</div></div>
       </div>
       <button id="copyImportant" class="btn">중요정보 복사</button><span id="copyMsg" class="copy-msg" aria-live="polite"></span>
@@ -157,7 +175,7 @@
     </section>
 
     <section class="card">
-      <h2>선택한 Day 일정</h2>
+      <h2>선한 Day 일정</h2>
 
       <section class="day-section visible" data-day="day0">
         <div class="day-head"><div class="day-title">✈️ Day0 새벽 도착</div><div class="day-sub">도착 → 이동 → 체크인 → 바로 취침</div></div>
@@ -165,18 +183,19 @@
           <article class="place-card">
             <div class="place-top"><span class="time">03:30</span><div class="name">나트랑 도착</div></div>
             <div class="badges"><span class="badge cat-move">도착</span></div>
-            <div class="tip">입국 후 바로 Grab 준비</div>
+            <div class="tip">입국 후 바로 숙소 이동 준비</div>
           </article>
           <article class="place-card">
             <div class="place-top"><span class="time">04:30</span><div class="name">공항 → InterContinental 이동</div></div>
             <div class="badges">
-              <span class="badge cat-move">이동</span><span class="badge badge-plain">Grab</span><span class="badge badge-plain">40분</span><span class="badge badge-plain">350k 동</span>
+              <span class="badge cat-move">이동</span><span class="badge badge-plain">Grab</span><span class="badge badge-plain">약 40분</span><span class="badge badge-plain">약 350,000동</span>
             </div>
-            <div class="tip">공항 기둥 번호 확인 후 탑승</div>
+            <div class="tip">Grab 또는 공식 택시 이용 · 4명+캐리어면 큰 차 추천 · 지도 핀 보여주기</div>
           </article>
           <article class="place-card">
             <div class="place-top"><span class="time">05:30</span><div class="name">호텔 체크인 후 취침</div></div>
             <div class="badges"><span class="badge cat-stay">숙소</span></div>
+            <div class="tip">전날 1박 예약이면 바로 쉬기 편합니다.</div>
           </article>
         </div>
       </section>
@@ -192,48 +211,49 @@
             <div class="place-top"><span class="time">12:00</span><div class="name">짜오마오1 (Chào Mào) 점심</div></div>
             <div class="badges">
               <span class="badge cat-meal">식사</span>
-              <span class="badge badge-plain">1인 35,000~250,000동</span>
-              <span class="badge badge-plain">대표: 반쎄오 120k · 미꽝 100k</span>
+              <span class="badge badge-plain">1인 35,000동 ~ 250,000동</span>
+              <span class="badge badge-plain">대표: 반쎄오 120,000동 · 미꽝 100,000동</span>
             </div>
             <div class="info">
               <div>주소: 166 Đ. Mê Linh, Tân Tiến, Nha Trang</div>
-              <div>특징: 베트남 가정식 맛집 · 한국인 방문 많음</div>
+              <div>특징: 베트남 가정식 · 한국인 방문 많음</div>
               <div>영업: 보통 11:00~22:00 (일부 브레이크 11:30~15:00 / 17:30~21:30)</div>
               <a class="link-btn" href="https://maps.google.com/?q=Chao+Mao+Nha+Trang" target="_blank" rel="noopener">지도 보기</a>
             </div>
-            <div class="tip">대표 메뉴: 모닝글로리 70k · 칠리새우 180k</div>
+            <div class="tip">처음부터 많이 주문하지 말고 4명이면 3~4개 먼저 주문</div>
           </article>
           <article class="place-card">
             <div class="place-top"><span class="time">16:00</span><div class="name">니에나 네일</div></div>
-            <div class="badges"><span class="badge cat-spa">네일</span><span class="badge badge-plain">젤 250k~400k</span><span class="badge badge-plain">1시간</span></div>
+            <div class="badges"><span class="badge cat-spa">네일</span><span class="badge badge-plain">젤 250,000동 ~ 400,000동</span><span class="badge badge-plain">약 1시간</span></div>
             <a class="link-btn" href="https://maps.google.com/?q=Niena+Nails+Nha+Trang" target="_blank" rel="noopener">지도 보기</a>
+            <div class="tip">원하는 디자인 사진을 미리 보여주면 빠릅니다.</div>
           </article>
           <article class="place-card">
             <div class="place-top"><span class="time">17:30</span><div class="name">Onsi Spa 마사지</div></div>
-            <div class="badges"><span class="badge cat-spa">마사지</span><span class="badge badge-plain">발 250k / 전신 350k~450k</span><span class="badge badge-plain">60~90분</span></div>
+            <div class="badges"><span class="badge cat-spa">마사지</span><span class="badge badge-plain">발 250,000동 / 전신 350,000동 ~ 450,000동</span><span class="badge badge-plain">60분 ~ 90분</span></div>
             <div class="info"><div>영업: 09:00~22:00</div><a class="link-btn" href="https://maps.google.com/?q=Onsi+Spa+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></div>
-            <div class="tip">예약 추천 · 팁 20k~50k</div>
+            <div class="tip">강도는 soft 또는 medium 요청 · 예약 추천 · 팁은 20,000동 ~ 50,000동</div>
           </article>
           <article class="place-card">
             <div class="place-top"><span class="time">18:30</span><div class="name">꽌옥응엉 저녁</div></div>
             <div class="badges">
               <span class="badge cat-meal">해산물</span>
-              <span class="badge badge-plain">50,000~150,000동/접시</span>
-              <span class="badge badge-plain">1시간 내외</span>
+              <span class="badge badge-plain">보통 50,000동 ~ 150,000동 / 접시</span>
+              <span class="badge badge-plain">약 1시간</span>
             </div>
             <div class="info">
               <div>주소: 34/2/15 Nguyễn Thiện Thuật, Tân Tiến, Nha Trang</div>
               <div>영업: AM 10:00 ~ PM 11:00</div>
-              <div>추천: Ốc len xào dừa 80k · Hàu nướng phô mai 90k · Ốc mỡ cháy tỏi 80k · Nghêu hấp sả 70k · 볶음밥 100k</div>
+              <div>추천: Ốc len xào dừa 80,000동 · Hàu nướng phô mai 90,000동 · Ốc mỡ cháy tỏi 80,000동 · Nghêu hấp sả 70,000동 · 볶음밥 100,000동</div>
               <a class="link-btn" href="https://maps.google.com/?q=Quan+Oc+Ngon+Nha+Trang" target="_blank" rel="noopener">지도 보기</a>
             </div>
-            <div class="tip">4명 기준: 5~6접시 + 볶음밥</div>
+            <div class="tip">4명 기준: 보통 5~6접시 + 볶음밥</div>
           </article>
           <article class="place-card">
             <div class="place-top"><span class="time">20:00</span><div class="name">Nha Trang Night Market</div></div>
-            <div class="badges"><span class="badge cat-shop">쇼핑</span><span class="badge badge-plain">30~40분</span></div>
+            <div class="badges"><span class="badge cat-shop">쇼핑</span><span class="badge badge-plain">30분 ~ 40분</span></div>
             <div class="info"><div>주소: 46 Tran Phu Street</div><a class="link-btn" href="https://maps.google.com/?q=Nha+Trang+Night+Market+Tran+Phu" target="_blank" rel="noopener">지도 보기</a></div>
-            <div class="tip">흥정: 250k 제시 시 100k부터 시작</div>
+            <div class="tip">오래 보지 말기 · 처음 가격 그대로 사지 않기 · 50%~70%부터 시작</div>
           </article>
         </div>
       </section>
@@ -241,40 +261,177 @@
       <section class="day-section" data-day="day2">
         <div class="day-head"><div class="day-title">🌞 Day2 관광 + 온천</div><div class="day-sub">사원 → 혼총곶 → 점심 → 온천 → 저녁</div></div>
         <div class="timeline">
-          <article class="place-card"><div class="place-top"><span class="time">09:00</span><div class="name">포나가르 사원</div></div><div class="badges"><span class="badge cat-tour">관광</span><span class="badge badge-plain">입장 30k</span><span class="badge badge-plain">1시간</span></div><a class="link-btn" href="https://maps.google.com/?q=Po+Nagar+Cham+Towers" target="_blank" rel="noopener">지도 보기</a></article>
-          <article class="place-card"><div class="place-top"><span class="time">10:30</span><div class="name">혼총곶</div></div><div class="badges"><span class="badge cat-tour">관광</span><span class="badge badge-plain">입장 22k</span><span class="badge badge-plain">30분</span></div><a class="link-btn" href="https://maps.google.com/?q=Hon+Chong+Promontory" target="_blank" rel="noopener">지도 보기</a></article>
-          <article class="place-card"><div class="place-top"><span class="time">12:00</span><div class="name">Cui Seafood 점심</div></div><div class="badges"><span class="badge cat-meal">식사</span><span class="badge badge-plain">버터새우 220k · 볶음밥 120k</span></div><a class="link-btn" href="https://maps.google.com/?q=Cui+Seafood+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
-          <article class="place-card"><div class="place-top"><span class="time">14:00</span><div class="name">I-Resort 머드온천</div></div><div class="badges"><span class="badge cat-spa">온천</span><span class="badge badge-plain">350k / Private 800k</span><span class="badge badge-plain">3시간</span></div><a class="link-btn" href="https://maps.google.com/?q=I+Resort+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
-          <article class="place-card"><div class="place-top"><span class="time">18:30</span><div class="name">Mix Greek Restaurant 저녁</div></div><div class="badges"><span class="badge cat-meal">식사</span><span class="badge badge-plain">양고기 350k · 샐러드 120k</span></div><a class="link-btn" href="https://maps.google.com/?q=Mix+Greek+Restaurant+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
+          <article class="place-card"><div class="place-top"><span class="time">09:00</span><div class="name">포나가르 사원</div></div><div class="badges"><span class="badge cat-tour">관광</span><span class="badge badge-plain">입장 30,000동</span><span class="badge badge-plain">약 1시간</span></div><a class="link-btn" href="https://maps.google.com/?q=Po+Nagar+Cham+Towers" target="_blank" rel="noopener">지도 보기</a></article>
+          <article class="place-card"><div class="place-top"><span class="time">10:30</span><div class="name">혼총곶</div></div><div class="badges"><span class="badge cat-tour">관광</span><span class="badge badge-plain">입장 22,000동</span><span class="badge badge-plain">약 30분</span></div><a class="link-btn" href="https://maps.google.com/?q=Hon+Chong+Promontory" target="_blank" rel="noopener">지도 보기</a></article>
+          <article class="place-card"><div class="place-top"><span class="time">12:00</span><div class="name">Cui Seafood 점심</div></div><div class="badges"><span class="badge cat-meal">식사</span><span class="badge badge-plain">버터새우 220,000동 · 볶음밥 120,000동 · 조개찜 180,000동</span></div><a class="link-btn" href="https://maps.google.com/?q=Cui+Seafood+Nha+Trang" target="_blank" rel="noopener">지도 보기</a><div class="tip">메인 3~4개 + 볶음밥 1개부터 시작</div></article>
+          <article class="place-card"><div class="place-top"><span class="time">14:00</span><div class="name">I-Resort 머드온천</div></div><div class="badges"><span class="badge cat-spa">온천</span><span class="badge badge-plain">머드온천 350,000동 / Private 800,000동</span><span class="badge badge-plain">약 3시간</span></div><a class="link-btn" href="https://maps.google.com/?q=I+Resort+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
+          <article class="place-card"><div class="place-top"><span class="time">18:30</span><div class="name">Mix Greek Restaurant 저녁</div></div><div class="badges"><span class="badge cat-meal">식사</span><span class="badge badge-plain">양고기 350,000동 · 샐러드 120,000동 · 피타 80,000동</span></div><a class="link-btn" href="https://maps.google.com/?q=Mix+Greek+Restaurant+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
         </div>
       </section>
 
       <section class="day-section" data-day="day3">
         <div class="day-head"><div class="day-title">🌴 Day3 리조트 이동일</div><div class="day-sub">시내 → 아미아나 이동 + 체크인 + 리조트 저녁</div></div>
         <div class="timeline">
-          <article class="place-card"><div class="place-top"><span class="time">10:30</span><div class="name">시내 → 아미아나 이동</div></div><div class="badges"><span class="badge cat-move">숙소 이동</span><span class="badge badge-plain">Grab 10~15분</span><span class="badge badge-plain">약 100k 동</span></div><a class="link-btn" href="https://maps.google.com/?q=Amiana+Resort+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
-          <article class="place-card"><div class="place-top"><span class="time">14:00</span><div class="name">아미아나 체크인</div></div><div class="badges"><span class="badge cat-stay">숙소</span></div><div class="tip">체크인 전 수영 가능 · 라군 비치 추천 · 선셋 18:00 · 버기카 요청 가능</div></article>
-          <article class="place-card"><div class="place-top"><span class="time">18:30</span><div class="name">Bacaro Restaurant 저녁</div></div><div class="badges"><span class="badge cat-meal">식사</span><span class="badge badge-plain">피자 280k · 파스타 240k · 스테이크 600k</span></div><a class="link-btn" href="https://maps.google.com/?q=Bacaro+Amiana+Resort" target="_blank" rel="noopener">지도 보기</a></article>
+          <article class="place-card"><div class="place-top"><span class="time">10:30</span><div class="name">시내 → 아미아나 이동</div></div><div class="badges"><span class="badge cat-move">숙소 이동</span><span class="badge badge-plain">Grab 10분 ~ 15분</span><span class="badge badge-plain">약 100,000동</span></div><a class="link-btn" href="https://maps.google.com/?q=Amiana+Resort+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
+          <article class="place-card"><div class="place-top"><span class="time">14:00</span><div class="name">아미아나 체크인</div></div><div class="badges"><span class="badge cat-stay">숙소</span></div><div class="tip">체크인 전 시설 사용 가능 여부 확인 · 선셋 18:00 확인 · 젖은 옷 바로 갈아입기</div></article>
+          <article class="place-card"><div class="place-top"><span class="time">18:30</span><div class="name">Bacaro Restaurant 저녁</div></div><div class="badges"><span class="badge cat-meal">식사</span><span class="badge badge-plain">피자 280,000동 · 파스타 240,000동 · 스테이크 600,000동</span></div><a class="link-btn" href="https://maps.google.com/?q=Bacaro+Amiana+Resort" target="_blank" rel="noopener">지도 보기</a></article>
         </div>
       </section>
 
       <section class="day-section" data-day="day4">
         <div class="day-head"><div class="day-title">✈️ Day4 점심 + 쇼핑</div><div class="day-sub">현재 확정 일정만 간단히 표시</div></div>
         <div class="timeline">
-          <article class="place-card"><div class="place-top"><span class="time">11:30</span><div class="name">쿠우쿠우 점심</div></div><div class="badges"><span class="badge cat-meal">식사</span><span class="badge badge-plain">300k~400k</span></div><a class="link-btn" href="https://maps.google.com/?q=QooQoo+Gold+Coast+Mall+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
-          <article class="place-card"><div class="place-top"><span class="time">12:30</span><div class="name">롯데마트 쇼핑</div></div><div class="badges"><span class="badge cat-shop">쇼핑</span><span class="badge badge-plain">커피 120k · 망고젤리 80k · 코코넛과자 70k</span></div><a class="link-btn" href="https://maps.google.com/?q=Lotte+Mart+Gold+Coast+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
+          <article class="place-card"><div class="place-top"><span class="time">11:30</span><div class="name">쿠우쿠우 점심</div></div><div class="badges"><span class="badge cat-meal">식사</span><span class="badge badge-plain">약 300,000동 ~ 400,000동</span></div><a class="link-btn" href="https://maps.google.com/?q=QooQoo+Gold+Coast+Mall+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
+          <article class="place-card"><div class="place-top"><span class="time">12:30</span><div class="name">롯데마트 쇼핑</div></div><div class="badges"><span class="badge cat-shop">쇼핑</span><span class="badge badge-plain">커피 120,000동 · 망고젤리 80,000동 · 코코넛과자 70,000동</span></div><a class="link-btn" href="https://maps.google.com/?q=Lotte+Mart+Gold+Coast+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
         </div>
       </section>
     </section>
 
     <details class="fold">
-      <summary>공항 / 환전 / 유심 / 그랩 팁</summary>
+      <summary>여행 팁 모아보기 · 공항 / 이동</summary>
+      <div class="fold-body"><ul class="mini-list">
+        <li>공항에서는 Grab 또는 공식 택시 승강장이 더 안전합니다.</li>
+        <li>부모님 4명 + 캐리어면 7인승 차량이 편합니다.</li>
+        <li>새벽 도착은 버스보다 택시/픽업이 덜 피곤합니다.</li>
+        <li>호텔 이름보다 지도 핀을 보여주면 더 정확합니다.</li>
+      </ul></div>
+    </details>
+
+    <details class="fold">
+      <summary>여행 팁 모아보기 · 돈 / 결제</summary>
+      <div class="fold-body"><ul class="mini-list">
+        <li>베트남 돈은 색보다 숫자 확인이 가장 중요합니다.</li>
+        <li>100,000동은 중간 금액, 500,000동은 큰 금액으로 기억하면 편합니다.</li>
+        <li>큰돈만 들고 다니지 말고 작은돈을 미리 준비하세요.</li>
+        <li>초반 생활비 정도만 현금, 나머지는 카드 병행이 편합니다.</li>
+      </ul></div>
+    </details>
+
+    <details class="fold">
+      <summary>여행 팁 모아보기 · 길거리 / 안전</summary>
+      <div class="fold-body"><ul class="mini-list">
+        <li>길 건널 때는 뛰지 말고 천천히 일정하게 걷기.</li>
+        <li>휴대폰을 도로 쪽 손에 들고 걷지 않기.</li>
+        <li>해변에서 짐 두고 수영하지 않기.</li>
+        <li>너무 친절하게 접근하면 한 번 더 확인하기.</li>
+      </ul></div>
+    </details>
+
+    <details class="fold">
+      <summary>여행 팁 모아보기 · Grab / 택시</summary>
+      <div class="fold-body"><ul class="mini-list">
+        <li>Grab은 목적지 설명이 적어도 되어 부모님 여행에 편합니다.</li>
+        <li>일반 택시는 미터기 또는 고정요금 먼저 확인하세요.</li>
+        <li>기사가 호텔이 닫았다고 해도 바로 믿지 말고 확인하세요.</li>
+        <li>새벽에는 유심/환전보다 숙소 이동을 먼저 하세요.</li>
+      </ul></div>
+    </details>
+
+    <details class="fold">
+      <summary>여행 팁 모아보기 · 식당</summary>
+      <div class="fold-body"><ul class="mini-list">
+        <li>4명이면 처음엔 메인 3~4개 + 볶음밥/면 1개가 적당합니다.</li>
+        <li>첫날은 차가운 음료/생식/생야채 과식은 피하세요.</li>
+        <li>낯선 메뉴는 직원 추천 + 인기 메뉴부터 주문하세요.</li>
+        <li>러시아어 메뉴가 보여도 나트랑에서는 자연스러운 편입니다.</li>
+      </ul></div>
+    </details>
+
+    <details class="fold">
+      <summary>여행 팁 모아보기 · 시장 / 쇼핑</summary>
+      <div class="fold-body"><ul class="mini-list">
+        <li>야시장은 구경하다 괜찮으면 사는 방식이 편합니다.</li>
+        <li>처음 가격 그대로 사지 말고 천천히 흥정하세요.</li>
+        <li>부모님 쇼핑은 오래 한 번보다 짧게 두 번이 편합니다.</li>
+        <li>야시장 + 마트 조합이 가장 실전적입니다.</li>
+      </ul></div>
+    </details>
+
+    <details class="fold">
+      <summary>여행 팁 모아보기 · 호텔 / 리조트</summary>
+      <div class="fold-body"><ul class="mini-list">
+        <li>새벽 도착이면 전날 1박 예약이 거의 필수입니다.</li>
+        <li>조식은 너무 늦지 않게 가면 더 쾌적합니다.</li>
+        <li>체크인 전/후 시설 사용 가능 여부를 먼저 물어보세요.</li>
+        <li>미니바/룸서비스/세탁은 가격 확인 후 이용하세요.</li>
+      </ul></div>
+    </details>
+
+    <details class="fold">
+      <summary>여행 팁 모아보기 · 마사지 / 네일</summary>
+      <div class="fold-body"><ul class="mini-list">
+        <li>저녁 인기 시간대는 예약이 편합니다.</li>
+        <li>마사지 강도는 soft 또는 medium으로 먼저 말하세요.</li>
+        <li>네일은 원하는 디자인 사진을 저장해 가세요.</li>
+        <li>만족하면 팁은 20,000동 ~ 50,000동 정도면 충분합니다.</li>
+      </ul></div>
+    </details>
+
+    <details class="fold">
+      <summary>여행 팁 모아보기 · 날씨 / 복장</summary>
+      <div class="fold-body"><ul class="mini-list">
+        <li>나트랑은 기온보다 햇빛 세기를 더 조심하세요.</li>
+        <li>모자/선글라스/얇은 긴팔/미끄럽지 않은 신발 추천.</li>
+        <li>첫날과 마지막날은 무리한 일정을 피하세요.</li>
+        <li>물놀이는 오전 또는 해질 무렵이 더 편합니다.</li>
+        <li>물놀이 후 젖은 옷은 바로 갈아입으세요.</li>
+      </ul></div>
+    </details>
+
+    <details class="fold">
+      <summary>여행 팁 모아보기 · 부모님 여행 꿀팁</summary>
+      <div class="fold-body"><ul class="mini-list">
+        <li>한 명만 Grab/지도/예약 담당하면 훨씬 편합니다.</li>
+        <li>호텔 주소/예약번호/가게 이름/지도 캡처를 미리 저장하세요.</li>
+        <li>영어 설명보다 지도 화면/예약 화면 보여주기가 빠릅니다.</li>
+        <li>공항은 3시간 전 출발이 가장 편합니다.</li>
+      </ul></div>
+    </details>
+
+    <details class="fold">
+      <summary>팁 문화 / 서비스 매너</summary>
+      <div class="fold-body">
+        <h3 style="font-size:0.98rem;margin:2px 0 8px;">🇻🇳 나트랑 팁 문화, 이것만 기억하세요</h3>
+        <ul class="mini-list">
+          <li>베트남은 팁 문화가 강한 편은 아니지만, 필요한 곳에만 소액을 주면 편합니다.</li>
+          <li><strong>마사지:</strong> 60분~90분 후 담당자에게 직접 <strong>50,000동</strong> 1장. 계산서에 Tip Included면 생략.</li>
+          <li><strong>호텔:</strong> 아침 외출 전 베개 위 <strong>20,000동</strong> 1장, 짐 옮겨준 직원에게도 <strong>20,000동</strong> 1장.</li>
+          <li><strong>안 줘도 되는 곳:</strong> 식당/카페, 택시/Grab. 잔돈 조금 안 받는 정도면 충분.</li>
+          <li><strong>한 줄 꿀팁:</strong> 팁은 동전보다 지폐로 주세요.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="fold">
+      <summary>실전 흥정 3단계</summary>
+      <div class="fold-body"><ul class="mini-list">
+        <li>1단계: 가격을 물어보고 처음 가격의 50% 정도부터 시작.</li>
+        <li>2단계: 안 되면 웃으면서 "노" 하고 천천히 다른 가게 보기.</li>
+        <li>3단계: 다시 부르면 60%~70% 선에서 맞춰보기.</li>
+        <li>너무 마음에 들면 70%~80% 선에서 마무리해도 괜찮습니다.</li>
+        <li>가격이 안 맞으면 그냥 나와도 됩니다.</li>
+        <li>비슷한 물건은 다른 가게에도 있을 가능성이 큽니다.</li>
+      </ul></div>
+    </details>
+
+    <details class="fold">
+      <summary>야시장 주의사항 카드</summary>
+      <div class="fold-body"><ul class="mini-list">
+        <li>지갑은 가방 안쪽에 넣고 가방은 앞으로 메기.</li>
+        <li>작은돈을 따로 빼서 결제하기.</li>
+        <li>야시장 입구보다 안쪽이 더 저렴할 수 있음.</li>
+        <li>한 번에 오래 보지 말고 30분~40분 정도 짧게 보기.</li>
+      </ul></div>
+    </details>
+
+    <details class="fold">
+      <summary>🇻🇳 2026 나트랑 야시장 가격 가이드</summary>
       <div class="fold-body">
         <ul class="mini-list">
-          <li>공항: Grab 호출 전 기둥 번호 먼저 확인</li>
-          <li>환전: 소액권 중심으로 나눠 보관</li>
-          <li>유심: 지도/그랩/카톡 우선 확인</li>
-          <li>그랩: 차량번호 일치 확인 후 탑승</li>
+          <li>처음엔 비싸게 부를 수 있어 아래 가격 근처까지 흥정하는 기준으로 보세요.</li>
+          <li><strong>신발 / 의류:</strong> 크록스(지비츠 포함) 160,000동 ~ 190,000동 / 코끼리 바지 60,000동 ~ 80,000동 / 휴양지 원피스 100,000동 ~ 130,000동 / 나이키 운동복 80,000동 ~ 100,000동</li>
+          <li><strong>먹거리 선물:</strong> 건망고(500g) 90,000동 ~ 110,000동 / 마카다미아(500g) 100,000동 ~ 120,000동 / 캐슈넛(500g) 110,000동 ~ 130,000동</li>
+          <li><strong>가방 / 잡화:</strong> 라탄 가방(중형) 160,000동 ~ 200,000동 / 니트 그물 가방 80,000동 ~ 110,000동 / 선글라스 100,000동 ~ 150,000동</li>
         </ul>
       </div>
     </details>
@@ -289,37 +446,14 @@
         <label class="check-item"><input type="checkbox" data-check="med"><span class="check-text">상비약 / 개인 처방약</span></label>
       </div>
     </details>
-
-    <details class="fold">
-      <summary>부모님 여행 주의사항</summary>
-      <div class="fold-body">
-        <ul class="mini-list">
-          <li>한낮(12~15시) 오래 걷지 않기</li>
-          <li>외출 전 물 1병 챙기기</li>
-          <li>밤늦은 외진 곳 피하기</li>
-          <li>낯선 권유 투어 즉시 결제 금지</li>
-        </ul>
-      </div>
-    </details>
-
-    <details class="fold">
-      <summary>비 오는 날 대체 일정</summary>
-      <div class="fold-body">
-        <ul class="mini-list">
-          <li>실내 카페 브런치 → 마사지/스파 → 실내 저녁</li>
-          <li>이동은 Grab 10~15분 내로 짧게</li>
-          <li>우산/미끄럼 방지 신발 준비</li>
-        </ul>
-      </div>
-    </details>
   </main>
 
   <script>
     const quickData = {
-      day0:{today:'도착 후 바로 휴식',stay:'InterContinental Nha Trang',move:'공항→호텔 Grab 40분 / 350k'},
+      day0:{today:'도착 후 바로 휴식',stay:'InterContinental Nha Trang',move:'공항→호텔 Grab 약 40분 / 약 350,000동'},
       day1:{today:'시내 여유 일정',stay:'InterContinental Nha Trang',move:'주요 이동 Grab 단거리'},
       day2:{today:'관광 + 온천',stay:'InterContinental Nha Trang',move:'관광지 이동 + I-Resort'},
-      day3:{today:'리조트 이동일',stay:'Amiana Resort Nha Trang',move:'시내→아미아나 Grab 10~15분 / 100k'},
+      day3:{today:'리조트 이동일',stay:'Amiana Resort Nha Trang',move:'시내→아미아나 Grab 10분~15분 / 100,000동'},
       day4:{today:'점심 + 쇼핑 마무리',stay:'Amiana Resort Nha Trang',move:'점심 후 쇼핑 동선 최소화'},
       all:{today:'전체 일정 보기',stay:'Day별 숙소 확인',move:'핵심 이동만 체크'}
     };
