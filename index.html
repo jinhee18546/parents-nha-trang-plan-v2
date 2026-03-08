@@ -5,111 +5,183 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>나트랑 부모님 여행 일정표</title>
   <style>
-    :root {
-      --bg:#f4f7fb;
+    :root{
+      --bg:#f3f6fb;
       --card:#ffffff;
+      --line:#e5ebf5;
       --text:#111827;
       --muted:#6b7280;
-      --line:#e5eaf3;
       --primary:#2563eb;
-      --soft:#eef4ff;
-      --shadow:0 8px 18px rgba(15,23,42,.06);
+      --primary-soft:#edf4ff;
+      --ok:#047857;
+      --warn:#92400e;
+      --shadow:0 8px 22px rgba(15,23,42,.07);
       --meal:#fff7ed;
       --tour:#eff6ff;
       --spa:#f5f3ff;
       --shop:#ecfdf5;
       --move:#f3f4f6;
       --stay:#fff1f2;
-      --money:#fffbeb;
     }
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-      font-size:19px;
-      line-height:1.65;
-      color:var(--text);
       background:var(--bg);
+      color:var(--text);
+      font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+      font-size:18px;
+      line-height:1.65;
+      padding-bottom:76px;
     }
-    .container{max-width:980px;margin:0 auto;padding:14px 10px 40px}
-    h1,h2,h3{margin:0}
-    h1{font-size:1.68rem;line-height:1.3}
-    h2{font-size:1.2rem;margin-bottom:10px}
+    .container{max-width:1024px;margin:0 auto;padding:14px 11px 40px}
+    h1,h2,h3,h4,p{margin:0}
+    h1{font-size:1.6rem;line-height:1.3}
+    h2{font-size:1.22rem;line-height:1.35;margin-bottom:10px}
 
-    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px;margin:10px 0}
-    .hero{border-left:5px solid var(--primary);background:linear-gradient(130deg,#edf4ff,#ffffff 65%)}
-    .hero p{margin:6px 0;color:#334155;font-size:.95rem}
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:14px;
+      margin:10px 0;
+    }
 
-    .day-switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
-    .day-btn{border:1.6px solid #c9d8ff;border-radius:10px;background:#fff;color:#1d4ed8;font-weight:800;font-size:.93rem;padding:10px 6px;cursor:pointer}
-    .day-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .hero{
+      border-left:5px solid var(--primary);
+      background:linear-gradient(130deg,#edf4ff,#fff 62%);
+    }
+    .hero-sub{margin-top:6px;color:#334155;font-size:.93rem;font-weight:700}
+    .status-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:11px}
+    .status-badge{
+      border:1px solid #d8e4ff;
+      background:#f8fbff;
+      color:#1e3a8a;
+      border-radius:999px;
+      padding:6px 9px;
+      font-size:.8rem;
+      font-weight:800;
+      text-align:center;
+    }
 
-    .quick-grid{display:grid;grid-template-columns:1fr;gap:8px}
-    .quick-item{border:1px solid #dbe6ff;background:#f8fbff;border-radius:12px;padding:10px}
-    .quick-label{font-size:.82rem;color:#1e40af;font-weight:900;margin-bottom:2px}
-    .quick-value{font-size:.98rem;font-weight:800;line-height:1.4}
+    .tabs{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:7px;
+      margin:10px 0;
+    }
+    .tab-btn{
+      border:1.5px solid #cfe0ff;
+      background:#fff;
+      color:#1d4ed8;
+      border-radius:10px;
+      padding:9px 6px;
+      font-size:.86rem;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .tab-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 
-    .money-note{font-size:.9rem;font-weight:800;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:8px 10px;margin-bottom:8px}
-    .tip-grid{display:grid;grid-template-columns:1fr;gap:8px}
-    .tip-quick{border:1px solid #fde68a;background:var(--money);border-radius:12px;padding:9px 10px}
-    .tip-quick h3{font-size:.9rem;font-weight:900;margin-bottom:4px;color:#92400e}
-    .tip-quick p{margin:0;font-size:.92rem;font-weight:800;line-height:1.4}
+    .day-chip-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:8px 0 2px}
+    .day-btn{
+      border:1.4px solid #d6e3ff;background:#fff;color:#1e40af;border-radius:9px;
+      font-size:.82rem;font-weight:900;padding:8px 6px;cursor:pointer
+    }
+    .day-btn.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
 
-    .important{background:#f7faff;border-color:#d8e5ff}
-    .important-grid{display:grid;grid-template-columns:1fr;gap:8px}
-    .info-row{border:1px solid #e2eaff;background:#fff;border-radius:10px;padding:8px 10px}
-    .info-k{font-size:.82rem;color:var(--muted);font-weight:800}
-    .info-v{font-size:.96rem;font-weight:900}
+    .quick-actions{display:grid;grid-template-columns:1fr;gap:8px}
+    .qa-card{border:1px solid #dbe7ff;background:#f8fbff;border-radius:12px;padding:10px}
+    .qa-k{font-size:.8rem;color:#1d4ed8;font-weight:900;margin-bottom:3px}
+    .qa-v{font-size:.95rem;font-weight:800;line-height:1.35}
 
-    .btn{border:none;border-radius:10px;background:#111827;color:#fff;padding:9px 12px;font-weight:800;font-size:.92rem;cursor:pointer;margin-top:8px}
-    .copy-msg{margin-left:8px;color:#0f766e;font-size:.88rem;font-weight:800}
+    .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .btn{
+      border:none;border-radius:10px;background:#111827;color:#fff;font-size:.86rem;
+      font-weight:900;padding:8px 11px;cursor:pointer;text-decoration:none;display:inline-block
+    }
+    .btn.primary{background:#1d4ed8}
+    .btn.ghost{background:#eef2ff;color:#1e3a8a;border:1px solid #cfe0ff}
+    .copy-msg{font-size:.84rem;color:var(--ok);font-weight:800;align-self:center}
 
-    .summary-grid{display:grid;grid-template-columns:1fr;gap:8px}
-    .summary-card{border:1px solid #d9e6ff;background:var(--soft);border-radius:11px;padding:9px}
-    .summary-k{font-size:.8rem;color:#1d4ed8;font-weight:900}
-    .summary-v{font-size:.94rem;font-weight:800;line-height:1.4}
+    .money-note{font-size:.86rem;font-weight:900;color:var(--warn);background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:8px 9px;margin-bottom:8px}
 
-    .day-section{display:none}
-    .day-section.visible{display:block}
-    .day-head{border:1px solid var(--line);background:#f9fbff;border-radius:12px;padding:10px;margin-bottom:10px}
-    .day-title{font-size:1.04rem;font-weight:900}
-    .day-sub{font-size:.9rem;color:#4b5563;font-weight:600}
+    .sticky-bar{
+      position:fixed;left:0;right:0;bottom:0;z-index:30;
+      background:rgba(255,255,255,.96);backdrop-filter:saturate(130%) blur(8px);
+      border-top:1px solid var(--line);
+      padding:7px 8px env(safe-area-inset-bottom);
+    }
+    .sticky-inner{max-width:1024px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1.6fr auto auto auto;gap:6px;align-items:center}
+    .pill{
+      border:1px solid #d8e4ff;background:#f8fbff;border-radius:999px;
+      padding:6px 8px;font-size:.74rem;font-weight:900;color:#1e3a8a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+    }
+    .icon-btn{
+      border:1px solid #d8e4ff;background:#fff;color:#1d4ed8;border-radius:999px;
+      font-size:.76rem;font-weight:900;padding:6px 8px;text-decoration:none
+    }
 
-    .timeline{display:grid;gap:9px}
-    .place-card{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px}
-    .place-top{display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap;margin-bottom:7px}
-    .time{min-width:60px;text-align:center;padding:4px 6px;border-radius:8px;background:#edf3ff;color:#1e3a8a;font-size:.86rem;font-weight:900}
-    .name{font-size:.98rem;font-weight:900;line-height:1.35;flex:1;min-width:150px}
-    .badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:7px}
-    .badge{display:inline-block;padding:4px 9px;border-radius:999px;font-size:.79rem;font-weight:800;border:1px solid transparent}
+    .section{display:none}
+    .section.active{display:block}
+
+    .ess-grid{display:grid;grid-template-columns:1fr;gap:8px}
+    .ess-card{border:1px solid var(--line);border-radius:12px;background:#fff;padding:10px}
+    .ess-title{font-size:.88rem;color:#1d4ed8;font-weight:900;margin-bottom:3px}
+    .ess-text{font-size:.92rem;font-weight:700;color:#334155}
+
+    .today-summary{display:grid;grid-template-columns:1fr;gap:7px}
+    .summary-card{border:1px solid #d9e6ff;background:var(--primary-soft);border-radius:11px;padding:8px}
+    .summary-k{font-size:.78rem;font-weight:900;color:#1d4ed8}
+    .summary-v{font-size:.9rem;font-weight:800;line-height:1.35}
+
+    .timeline{display:grid;gap:8px}
+    .item{border:1px solid var(--line);border-radius:12px;background:#fff;padding:10px}
+    .item-top{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;flex-wrap:wrap}
+    .time{min-width:58px;text-align:center;background:#edf3ff;color:#1e3a8a;border-radius:8px;padding:4px 6px;font-size:.82rem;font-weight:900}
+    .place{font-size:.96rem;font-weight:900;line-height:1.32;flex:1;min-width:160px}
+    .line{font-size:.89rem;color:#334155;font-weight:700;margin-bottom:6px}
+    .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+    .badge{border-radius:999px;padding:4px 8px;font-size:.76rem;font-weight:900;border:1px solid transparent}
     .cat-meal{background:var(--meal);color:#b45309}
     .cat-tour{background:var(--tour);color:#1d4ed8}
     .cat-spa{background:var(--spa);color:#6d28d9}
     .cat-shop{background:var(--shop);color:#047857}
     .cat-move{background:var(--move);color:#374151}
     .cat-stay{background:var(--stay);color:#be123c}
-    .badge-plain{background:#f8fafc;color:#111827;border-color:#e5e7eb}
-    .info{display:grid;gap:3px;font-size:.89rem;color:#374151;margin-bottom:7px}
-    .tip{border:1px solid #e6ebf2;background:#f8fafc;border-radius:9px;padding:7px 9px;font-size:.86rem;font-weight:700;color:#334155}
+    .mini{background:#f8fafc;color:#111827;border-color:#e5e7eb}
 
-    details.fold{border:1px solid var(--line);border-radius:13px;background:#fff;margin:10px 0;box-shadow:var(--shadow)}
-    details.fold summary{cursor:pointer;list-style:none;padding:12px;font-weight:900;font-size:.99rem}
+    details.acc{border:1px solid #e4e9f2;border-radius:10px;background:#fafcff;margin-top:6px}
+    details.acc summary{list-style:none;cursor:pointer;padding:8px 10px;font-size:.83rem;font-weight:900;color:#1e3a8a}
+    details.acc summary::-webkit-details-marker{display:none}
+    .acc-body{padding:0 10px 9px}
+    .acc-body ul{margin:0;padding-left:17px;display:grid;gap:5px;font-size:.84rem;color:#334155;font-weight:700}
+
+    .schedule-wrap{display:none}
+    .schedule-wrap.visible{display:block}
+    .day-head{border:1px solid var(--line);background:#f9fbff;border-radius:10px;padding:9px;margin-bottom:8px}
+    .day-title{font-size:.95rem;font-weight:900}
+    .day-sub{font-size:.84rem;color:#4b5563;font-weight:700}
+
+    details.fold{border:1px solid var(--line);border-radius:12px;background:#fff;margin:8px 0;box-shadow:var(--shadow)}
+    details.fold summary{cursor:pointer;list-style:none;padding:10px;font-weight:900;font-size:.9rem}
     details.fold summary::-webkit-details-marker{display:none}
-    details.fold .fold-body{padding:0 12px 12px}
+    .fold-body{padding:0 10px 10px}
+    .mini-list{margin:0;padding-left:17px;display:grid;gap:6px;font-size:.88rem;color:#374151;font-weight:700}
 
-    .mini-list{margin:0;padding-left:18px;display:grid;gap:6px;font-size:.92rem;color:#374151;font-weight:600}
-
-    .check-item{display:flex;gap:10px;align-items:flex-start;border:1px solid #e5ebf6;background:#fcfdff;border-radius:11px;padding:10px;margin:7px 0}
-    .check-item input{width:28px;height:28px;flex:0 0 auto;margin-top:1px}
-    .check-text{font-size:.96rem;font-weight:800}
+    .check-group-title{font-size:.9rem;font-weight:900;color:#1d4ed8;margin:8px 0 4px}
+    .check-item{display:flex;gap:9px;align-items:flex-start;border:1px solid #e6ecf6;background:#fcfdff;border-radius:10px;padding:9px;margin:6px 0}
+    .check-item input{width:26px;height:26px;flex:0 0 auto;margin-top:1px}
+    .check-text{font-size:.9rem;font-weight:800}
 
     @media (min-width:760px){
-      .day-switch{grid-template-columns:repeat(6,minmax(0,1fr))}
-      .quick-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-      .tip-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .important-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .important-grid .full{grid-column:1/-1}
-      .summary-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+      body{font-size:19px}
+      .status-row{grid-template-columns:repeat(4,minmax(0,1fr))}
+      .quick-actions{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .ess-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .today-summary{grid-template-columns:repeat(5,minmax(0,1fr))}
+      .day-chip-row{grid-template-columns:repeat(6,minmax(0,1fr))}
+      .tabs{grid-template-columns:repeat(4,minmax(0,1fr))}
     }
   </style>
 </head>
@@ -117,458 +189,470 @@
   <main class="container">
     <section class="card hero">
       <h1>나트랑 부모님 여행 일정표</h1>
-      <p><strong>핵심:</strong> 오늘 필요한 정보 먼저 보고, 자세한 팁은 아래에서 펼쳐서 확인하세요.</p>
-      <div class="day-switch" role="tablist" aria-label="일정 선택">
-        <button class="day-btn active" data-day="day0" role="tab" aria-selected="true">Day0</button>
-        <button class="day-btn" data-day="day1" role="tab" aria-selected="false">Day1</button>
-        <button class="day-btn" data-day="day2" role="tab" aria-selected="false">Day2</button>
-        <button class="day-btn" data-day="day3" role="tab" aria-selected="false">Day3</button>
-        <button class="day-btn" data-day="day4" role="tab" aria-selected="false">Day4</button>
-        <button class="day-btn" data-day="all" role="tab" aria-selected="false">전체 보기</button>
+      <p class="hero-sub">실전 이동·식사·휴식을 한 화면에서 빠르게 확인하는 부모님 맞춤 일정표</p>
+      <div class="status-row">
+        <div class="status-badge">✅ 확정 일정</div>
+        <div class="status-badge">🏨 숙소 이동 1회</div>
+        <div class="status-badge">👨‍👩‍👧‍👦 부모님 동선</div>
+        <div class="status-badge">🕒 마지막 업데이트: 오늘</div>
       </div>
     </section>
 
     <section class="card">
-      <h2>오늘 한눈에 보기</h2>
-      <div id="todayQuick" class="quick-grid"></div>
-    </section>
+      <div class="tabs" role="tablist" aria-label="메인 탭">
+        <button class="tab-btn active" data-tab="today" role="tab" aria-selected="true">Today</button>
+        <button class="tab-btn" data-tab="byday" role="tab" aria-selected="false">By Day</button>
+        <button class="tab-btn" data-tab="full" role="tab" aria-selected="false">Full Trip</button>
+        <button class="tab-btn" data-tab="essentials" role="tab" aria-selected="false">Essentials</button>
+      </div>
 
-    <section class="card">
-      <h2>상단 빠른 팁 (돈 · 팁 · 흥정)</h2>
-      <div class="money-note">이 페이지의 가격은 모두 베트남 동(VND) 기준입니다.</div>
-      <div class="tip-grid">
-        <article class="tip-quick">
-          <h3>돈은 색보다 숫자 확인</h3>
-          <p><strong>10,000동 / 100,000동 / 500,000동</strong> 숫자를 꼭 확인하세요.</p>
+      <div class="quick-actions">
+        <article class="qa-card">
+          <div class="qa-k">오늘 계획</div>
+          <div class="qa-v" id="qaTodayPlan">Day0 · 도착 후 숙소 이동 및 휴식</div>
         </article>
-        <article class="tip-quick">
-          <h3>마사지 팁</h3>
-          <p><strong>마사지 팁은 보통 50,000동</strong>으로 생각하면 편합니다.</p>
+        <article class="qa-card">
+          <div class="qa-k">호텔 / 지도</div>
+          <div class="qa-v" id="qaHotel">InterContinental Nha Trang</div>
+          <div class="btn-row"><a id="qaHotelMap" class="btn ghost" href="https://maps.google.com/?q=Intercontinental+Nha+Trang" target="_blank" rel="noopener">지도 열기</a></div>
         </article>
-        <article class="tip-quick">
-          <h3>야시장 흥정</h3>
-          <p>처음 가격의 <strong>50% ~ 70%</strong>부터 시작, 마음에 들면 <strong>70% ~ 80%</strong> 마무리.</p>
-        </article>
-        <article class="tip-quick">
-          <h3>작은돈 준비</h3>
-          <p><strong>10,000동 / 20,000동 / 50,000동</strong>을 미리 나눠 두세요.</p>
+        <article class="qa-card">
+          <div class="qa-k">핵심 액션</div>
+          <div class="qa-v">지금 필요한 정보만 복사/열기</div>
+          <div class="btn-row"><button id="copyImportant" class="btn">핵심정보 복사</button><span id="copyMsg" class="copy-msg" aria-live="polite"></span></div>
         </article>
       </div>
     </section>
 
-    <section class="card important">
-      <h2>중요정보 (바로 확인)</h2>
-      <div id="importantText" class="important-grid">
-        <div class="info-row"><div class="info-k">오늘 숙소</div><div id="todayStay" class="info-v">InterContinental Nha Trang</div></div>
-        <div class="info-row"><div class="info-k">숙소 이동</div><div class="info-v">시내 ↔ 리조트 이동 1회 (Day3)</div></div>
-        <div class="info-row"><div class="info-k">공항 → 시내호텔</div><div class="info-v">Grab 약 40분 / 약 350,000동</div></div>
-        <div class="info-row"><div class="info-k">시내 → 아미아나</div><div class="info-v">Grab 10분 ~ 15분 / 약 100,000동</div></div>
-        <div class="info-row" id="breakfastRow"><div class="info-k">시내 호텔 조식</div><div class="info-v">06:30 ~ 10:30 (07:00 추천)</div></div>
-        <div class="info-row full"><div class="info-k">공항 Grab 팁</div><div class="info-v">공항 밖 기둥 번호 확인 후 호출 위치 맞추기</div></div>
-      </div>
-      <button id="copyImportant" class="btn">중요정보 복사</button><span id="copyMsg" class="copy-msg" aria-live="polite"></span>
-    </section>
-
-    <section class="card">
-      <h2>오늘 일정 요약</h2>
-      <div id="todaySummary" class="summary-grid" aria-live="polite"></div>
-    </section>
-
-    <section class="card">
-      <h2>선한 Day 일정</h2>
-
-      <section class="day-section visible" data-day="day0">
-        <div class="day-head"><div class="day-title">✈️ Day0 새벽 도착</div><div class="day-sub">도착 → 이동 → 체크인 → 바로 취침</div></div>
-        <div class="timeline">
-          <article class="place-card">
-            <div class="place-top"><span class="time">03:30</span><div class="name">나트랑 도착</div></div>
-            <div class="badges"><span class="badge cat-move">도착</span></div>
-            <div class="tip">입국 후 바로 숙소 이동 준비</div>
-          </article>
-          <article class="place-card">
-            <div class="place-top"><span class="time">04:30</span><div class="name">공항 → InterContinental 이동</div></div>
-            <div class="badges">
-              <span class="badge cat-move">이동</span><span class="badge badge-plain">Grab</span><span class="badge badge-plain">약 40분</span><span class="badge badge-plain">약 350,000동</span>
-            </div>
-            <div class="tip">Grab 또는 공식 택시 이용 · 4명+캐리어면 큰 차 추천 · 지도 핀 보여주기</div>
-          </article>
-          <article class="place-card">
-            <div class="place-top"><span class="time">05:30</span><div class="name">호텔 체크인 후 취침</div></div>
-            <div class="badges"><span class="badge cat-stay">숙소</span></div>
-            <div class="tip">전날 1박 예약이면 바로 쉬기 편합니다.</div>
-          </article>
-        </div>
+    <section id="section-today" class="section active">
+      <section class="card">
+        <h2>오늘 일정</h2>
+        <div class="today-summary" id="todaySummary"></div>
       </section>
 
-      <section class="day-section" data-day="day1">
-        <div class="day-head"><div class="day-title">🌤️ Day1 시내 여유 일정</div><div class="day-sub">점심 → 네일 → 마사지 → 저녁 → 야시장</div></div>
-        <div class="timeline">
-          <article class="place-card">
-            <div class="place-top"><span class="time">10:30</span><div class="name">기상 & 준비</div></div>
-            <div class="badges"><span class="badge cat-stay">휴식</span></div>
-          </article>
-          <article class="place-card">
-            <div class="place-top"><span class="time">12:00</span><div class="name">짜오마오1 (Chào Mào) 점심</div></div>
-            <div class="badges">
-              <span class="badge cat-meal">식사</span>
-              <span class="badge badge-plain">1인 35,000동 ~ 250,000동</span>
-              <span class="badge badge-plain">대표: 반쎄오 120,000동 · 미꽝 100,000동</span>
-            </div>
-            <div class="info">
-              <div>주소: 166 Đ. Mê Linh, Tân Tiến, Nha Trang</div>
-              <div>특징: 베트남 가정식 · 한국인 방문 많음</div>
-              <div>영업: 보통 11:00~22:00 (일부 브레이크 11:30~15:00 / 17:30~21:30)</div>
-              <a class="link-btn" href="https://maps.google.com/?q=Chao+Mao+Nha+Trang" target="_blank" rel="noopener">지도 보기</a>
-            </div>
-            <div class="tip">처음부터 많이 주문하지 말고 4명이면 3~4개 먼저 주문</div>
-          </article>
-          <article class="place-card">
-            <div class="place-top"><span class="time">16:00</span><div class="name">니에나 네일</div></div>
-            <div class="badges"><span class="badge cat-spa">네일</span><span class="badge badge-plain">젤 250,000동 ~ 400,000동</span><span class="badge badge-plain">약 1시간</span></div>
-            <a class="link-btn" href="https://maps.google.com/?q=Niena+Nails+Nha+Trang" target="_blank" rel="noopener">지도 보기</a>
-            <div class="tip">원하는 디자인 사진을 미리 보여주면 빠릅니다.</div>
-          </article>
-          <article class="place-card">
-            <div class="place-top"><span class="time">17:30</span><div class="name">Onsi Spa 마사지</div></div>
-            <div class="badges"><span class="badge cat-spa">마사지</span><span class="badge badge-plain">발 250,000동 / 전신 350,000동 ~ 450,000동</span><span class="badge badge-plain">60분 ~ 90분</span></div>
-            <div class="info"><div>영업: 09:00~22:00</div><a class="link-btn" href="https://maps.google.com/?q=Onsi+Spa+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></div>
-            <div class="tip">강도는 soft 또는 medium 요청 · 예약 추천 · 팁은 20,000동 ~ 50,000동</div>
-          </article>
-          <article class="place-card">
-            <div class="place-top"><span class="time">18:30</span><div class="name">꽌옥응엉 저녁</div></div>
-            <div class="badges">
-              <span class="badge cat-meal">해산물</span>
-              <span class="badge badge-plain">보통 50,000동 ~ 150,000동 / 접시</span>
-              <span class="badge badge-plain">약 1시간</span>
-            </div>
-            <div class="info">
-              <div>주소: 34/2/15 Nguyễn Thiện Thuật, Tân Tiến, Nha Trang</div>
-              <div>영업: AM 10:00 ~ PM 11:00</div>
-              <div>추천: Ốc len xào dừa 80,000동 · Hàu nướng phô mai 90,000동 · Ốc mỡ cháy tỏi 80,000동 · Nghêu hấp sả 70,000동 · 볶음밥 100,000동</div>
-              <a class="link-btn" href="https://maps.google.com/?q=Quan+Oc+Ngon+Nha+Trang" target="_blank" rel="noopener">지도 보기</a>
-            </div>
-            <div class="tip">4명 기준: 보통 5~6접시 + 볶음밥</div>
-          </article>
-          <article class="place-card">
-            <div class="place-top"><span class="time">20:00</span><div class="name">Nha Trang Night Market</div></div>
-            <div class="badges"><span class="badge cat-shop">쇼핑</span><span class="badge badge-plain">30분 ~ 40분</span></div>
-            <div class="info"><div>주소: 46 Tran Phu Street</div><a class="link-btn" href="https://maps.google.com/?q=Nha+Trang+Night+Market+Tran+Phu" target="_blank" rel="noopener">지도 보기</a></div>
-            <div class="tip">오래 보지 말기 · 처음 가격 그대로 사지 않기 · 50%~70%부터 시작</div>
-          </article>
-        </div>
+      <section class="card">
+        <h2>오늘 타임라인</h2>
+        <div id="todayTimeline" class="timeline"></div>
       </section>
 
-      <section class="day-section" data-day="day2">
-        <div class="day-head"><div class="day-title">🌞 Day2 관광 + 온천</div><div class="day-sub">사원 → 혼총곶 → 점심 → 온천 → 저녁</div></div>
-        <div class="timeline">
-          <article class="place-card"><div class="place-top"><span class="time">09:00</span><div class="name">포나가르 사원</div></div><div class="badges"><span class="badge cat-tour">관광</span><span class="badge badge-plain">입장 30,000동</span><span class="badge badge-plain">약 1시간</span></div><a class="link-btn" href="https://maps.google.com/?q=Po+Nagar+Cham+Towers" target="_blank" rel="noopener">지도 보기</a></article>
-          <article class="place-card"><div class="place-top"><span class="time">10:30</span><div class="name">혼총곶</div></div><div class="badges"><span class="badge cat-tour">관광</span><span class="badge badge-plain">입장 22,000동</span><span class="badge badge-plain">약 30분</span></div><a class="link-btn" href="https://maps.google.com/?q=Hon+Chong+Promontory" target="_blank" rel="noopener">지도 보기</a></article>
-          <article class="place-card"><div class="place-top"><span class="time">12:00</span><div class="name">Cui Seafood 점심</div></div><div class="badges"><span class="badge cat-meal">식사</span><span class="badge badge-plain">버터새우 220,000동 · 볶음밥 120,000동 · 조개찜 180,000동</span></div><a class="link-btn" href="https://maps.google.com/?q=Cui+Seafood+Nha+Trang" target="_blank" rel="noopener">지도 보기</a><div class="tip">메인 3~4개 + 볶음밥 1개부터 시작</div></article>
-          <article class="place-card"><div class="place-top"><span class="time">14:00</span><div class="name">I-Resort 머드온천</div></div><div class="badges"><span class="badge cat-spa">온천</span><span class="badge badge-plain">머드온천 350,000동 / Private 800,000동</span><span class="badge badge-plain">약 3시간</span></div><a class="link-btn" href="https://maps.google.com/?q=I+Resort+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
-          <article class="place-card"><div class="place-top"><span class="time">18:30</span><div class="name">Mix Greek Restaurant 저녁</div></div><div class="badges"><span class="badge cat-meal">식사</span><span class="badge badge-plain">양고기 350,000동 · 샐러드 120,000동 · 피타 80,000동</span></div><a class="link-btn" href="https://maps.google.com/?q=Mix+Greek+Restaurant+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
-        </div>
-      </section>
-
-      <section class="day-section" data-day="day3">
-        <div class="day-head"><div class="day-title">🌴 Day3 리조트 이동일</div><div class="day-sub">시내 → 아미아나 이동 + 체크인 + 리조트 저녁</div></div>
-        <div class="timeline">
-          <article class="place-card"><div class="place-top"><span class="time">10:30</span><div class="name">시내 → 아미아나 이동</div></div><div class="badges"><span class="badge cat-move">숙소 이동</span><span class="badge badge-plain">Grab 10분 ~ 15분</span><span class="badge badge-plain">약 100,000동</span></div><a class="link-btn" href="https://maps.google.com/?q=Amiana+Resort+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
-          <article class="place-card"><div class="place-top"><span class="time">14:00</span><div class="name">아미아나 체크인</div></div><div class="badges"><span class="badge cat-stay">숙소</span></div><div class="tip">체크인 전 시설 사용 가능 여부 확인 · 선셋 18:00 확인 · 젖은 옷 바로 갈아입기</div></article>
-          <article class="place-card"><div class="place-top"><span class="time">18:30</span><div class="name">Bacaro Restaurant 저녁</div></div><div class="badges"><span class="badge cat-meal">식사</span><span class="badge badge-plain">피자 280,000동 · 파스타 240,000동 · 스테이크 600,000동</span></div><a class="link-btn" href="https://maps.google.com/?q=Bacaro+Amiana+Resort" target="_blank" rel="noopener">지도 보기</a></article>
-        </div>
-      </section>
-
-      <section class="day-section" data-day="day4">
-        <div class="day-head"><div class="day-title">✈️ Day4 점심 + 쇼핑</div><div class="day-sub">현재 확정 일정만 간단히 표시</div></div>
-        <div class="timeline">
-          <article class="place-card"><div class="place-top"><span class="time">11:30</span><div class="name">쿠우쿠우 점심</div></div><div class="badges"><span class="badge cat-meal">식사</span><span class="badge badge-plain">약 300,000동 ~ 400,000동</span></div><a class="link-btn" href="https://maps.google.com/?q=QooQoo+Gold+Coast+Mall+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
-          <article class="place-card"><div class="place-top"><span class="time">12:30</span><div class="name">롯데마트 쇼핑</div></div><div class="badges"><span class="badge cat-shop">쇼핑</span><span class="badge badge-plain">커피 120,000동 · 망고젤리 80,000동 · 코코넛과자 70,000동</span></div><a class="link-btn" href="https://maps.google.com/?q=Lotte+Mart+Gold+Coast+Nha+Trang" target="_blank" rel="noopener">지도 보기</a></article>
+      <section class="card">
+        <h2>즉시 체크</h2>
+        <label class="check-item"><input type="checkbox" data-check="today_docs"><span class="check-text">여권/예약 확인서 확인</span></label>
+        <label class="check-item"><input type="checkbox" data-check="today_grab"><span class="check-text">Grab 호출 위치 확인</span></label>
+        <label class="check-item"><input type="checkbox" data-check="today_cash"><span class="check-text">작은돈(10,000동/20,000동/50,000동) 챙기기</span></label>
+        <div class="btn-row">
+          <a id="todayMapBtn" class="btn primary" href="https://maps.google.com/?q=Intercontinental+Nha+Trang" target="_blank" rel="noopener">오늘 핵심 지도 열기</a>
+          <button id="copyToday" class="btn">오늘 일정 복사</button>
         </div>
       </section>
     </section>
 
-    <details class="fold">
-      <summary>여행 팁 모아보기 · 공항 / 이동</summary>
-      <div class="fold-body"><ul class="mini-list">
-        <li>공항에서는 Grab 또는 공식 택시 승강장이 더 안전합니다.</li>
-        <li>부모님 4명 + 캐리어면 7인승 차량이 편합니다.</li>
-        <li>새벽 도착은 버스보다 택시/픽업이 덜 피곤합니다.</li>
-        <li>호텔 이름보다 지도 핀을 보여주면 더 정확합니다.</li>
-      </ul></div>
-    </details>
+    <section id="section-byday" class="section">
+      <section class="card">
+        <h2>일자별 보기</h2>
+        <div class="day-chip-row" role="tablist" aria-label="day selector">
+          <button class="day-btn active" data-day="day0" role="tab" aria-selected="true">Day0</button>
+          <button class="day-btn" data-day="day1" role="tab" aria-selected="false">Day1</button>
+          <button class="day-btn" data-day="day2" role="tab" aria-selected="false">Day2</button>
+          <button class="day-btn" data-day="day3" role="tab" aria-selected="false">Day3</button>
+          <button class="day-btn" data-day="day4" role="tab" aria-selected="false">Day4</button>
+          <button class="day-btn" data-day="all" role="tab" aria-selected="false">전체</button>
+        </div>
+      </section>
 
-    <details class="fold">
-      <summary>여행 팁 모아보기 · 돈 / 결제</summary>
-      <div class="fold-body"><ul class="mini-list">
-        <li>베트남 돈은 색보다 숫자 확인이 가장 중요합니다.</li>
-        <li>100,000동은 중간 금액, 500,000동은 큰 금액으로 기억하면 편합니다.</li>
-        <li>큰돈만 들고 다니지 말고 작은돈을 미리 준비하세요.</li>
-        <li>초반 생활비 정도만 현금, 나머지는 카드 병행이 편합니다.</li>
-      </ul></div>
-    </details>
+      <div id="bydayWrap"></div>
+    </section>
 
-    <details class="fold">
-      <summary>여행 팁 모아보기 · 길거리 / 안전</summary>
-      <div class="fold-body"><ul class="mini-list">
-        <li>길 건널 때는 뛰지 말고 천천히 일정하게 걷기.</li>
-        <li>휴대폰을 도로 쪽 손에 들고 걷지 않기.</li>
-        <li>해변에서 짐 두고 수영하지 않기.</li>
-        <li>너무 친절하게 접근하면 한 번 더 확인하기.</li>
-      </ul></div>
-    </details>
+    <section id="section-full" class="section">
+      <section class="card">
+        <h2>전체 일정 한 번에 보기</h2>
+        <div id="fullWrap"></div>
+      </section>
+    </section>
 
-    <details class="fold">
-      <summary>여행 팁 모아보기 · Grab / 택시</summary>
-      <div class="fold-body"><ul class="mini-list">
-        <li>Grab은 목적지 설명이 적어도 되어 부모님 여행에 편합니다.</li>
-        <li>일반 택시는 미터기 또는 고정요금 먼저 확인하세요.</li>
-        <li>기사가 호텔이 닫았다고 해도 바로 믿지 말고 확인하세요.</li>
-        <li>새벽에는 유심/환전보다 숙소 이동을 먼저 하세요.</li>
-      </ul></div>
-    </details>
+    <section id="section-essentials" class="section">
+      <section class="card">
+        <h2>Essentials (실전 정보)</h2>
+        <div class="money-note">이 페이지의 가격은 모두 베트남 동(VND) 기준입니다.</div>
+        <div id="importantText" class="ess-grid">
+          <article class="ess-card"><div class="ess-title">호텔 정보</div><div class="ess-text">InterContinental Nha Trang / Amiana Resort Nha Trang</div></article>
+          <article class="ess-card"><div class="ess-title">공항 → 호텔</div><div class="ess-text">Grab 약 40분 / 약 350,000동</div></article>
+          <article class="ess-card"><div class="ess-title">체크인 / 조식</div><div class="ess-text">시내 체크인 14:00, 조식 06:30~10:30 (07:00 추천)</div></article>
+          <article class="ess-card"><div class="ess-title">Grab 핵심 팁</div><div class="ess-text">공항 기둥 번호 확인 · 차량번호 확인 · 지도 핀 보여주기</div></article>
+          <article class="ess-card"><div class="ess-title">안전 메모</div><div class="ess-text">야시장 30~40분 짧게 · 밤늦은 외진 길 피하기</div></article>
+          <article class="ess-card"><div class="ess-title">마사지 팁</div><div class="ess-text">보통 50,000동, Tip Included면 생략 가능</div></article>
+        </div>
+      </section>
 
-    <details class="fold">
-      <summary>여행 팁 모아보기 · 식당</summary>
-      <div class="fold-body"><ul class="mini-list">
-        <li>4명이면 처음엔 메인 3~4개 + 볶음밥/면 1개가 적당합니다.</li>
-        <li>첫날은 차가운 음료/생식/생야채 과식은 피하세요.</li>
-        <li>낯선 메뉴는 직원 추천 + 인기 메뉴부터 주문하세요.</li>
-        <li>러시아어 메뉴가 보여도 나트랑에서는 자연스러운 편입니다.</li>
-      </ul></div>
-    </details>
+      <details class="fold">
+        <summary>상황별 팁 · 공항 도착</summary>
+        <div class="fold-body"><ul class="mini-list">
+          <li>공항에서는 Grab 또는 공식 택시 승강장이 안전합니다.</li>
+          <li>4명 + 캐리어면 7인승 차량이 편합니다.</li>
+          <li>새벽 도착은 유심/환전보다 숙소 이동 먼저 하세요.</li>
+        </ul></div>
+      </details>
 
-    <details class="fold">
-      <summary>여행 팁 모아보기 · 시장 / 쇼핑</summary>
-      <div class="fold-body"><ul class="mini-list">
-        <li>야시장은 구경하다 괜찮으면 사는 방식이 편합니다.</li>
-        <li>처음 가격 그대로 사지 말고 천천히 흥정하세요.</li>
-        <li>부모님 쇼핑은 오래 한 번보다 짧게 두 번이 편합니다.</li>
-        <li>야시장 + 마트 조합이 가장 실전적입니다.</li>
-      </ul></div>
-    </details>
+      <details class="fold">
+        <summary>상황별 팁 · Grab</summary>
+        <div class="fold-body"><ul class="mini-list">
+          <li>Grab은 목적지 설명이 적어도 되어 부모님 여행에 편합니다.</li>
+          <li>탑승 전 기사 이름과 차량번호를 꼭 확인하세요.</li>
+          <li>기사가 호텔이 닫았다고 해도 바로 믿지 말고 확인하세요.</li>
+        </ul></div>
+      </details>
 
-    <details class="fold">
-      <summary>여행 팁 모아보기 · 호텔 / 리조트</summary>
-      <div class="fold-body"><ul class="mini-list">
-        <li>새벽 도착이면 전날 1박 예약이 거의 필수입니다.</li>
-        <li>조식은 너무 늦지 않게 가면 더 쾌적합니다.</li>
-        <li>체크인 전/후 시설 사용 가능 여부를 먼저 물어보세요.</li>
-        <li>미니바/룸서비스/세탁은 가격 확인 후 이용하세요.</li>
-      </ul></div>
-    </details>
+      <details class="fold">
+        <summary>상황별 팁 · 마사지</summary>
+        <div class="fold-body"><ul class="mini-list">
+          <li>저녁 인기 시간대는 예약 추천.</li>
+          <li>강도는 soft 또는 medium으로 먼저 요청.</li>
+          <li>팁은 보통 50,000동, 계산서 Tip Included면 생략.</li>
+        </ul></div>
+      </details>
 
-    <details class="fold">
-      <summary>여행 팁 모아보기 · 마사지 / 네일</summary>
-      <div class="fold-body"><ul class="mini-list">
-        <li>저녁 인기 시간대는 예약이 편합니다.</li>
-        <li>마사지 강도는 soft 또는 medium으로 먼저 말하세요.</li>
-        <li>네일은 원하는 디자인 사진을 저장해 가세요.</li>
-        <li>만족하면 팁은 20,000동 ~ 50,000동 정도면 충분합니다.</li>
-      </ul></div>
-    </details>
+      <details class="fold">
+        <summary>상황별 팁 · 쇼핑</summary>
+        <div class="fold-body"><ul class="mini-list">
+          <li>처음 가격 그대로 사지 말고 50%~70%부터 시작.</li>
+          <li>안 되면 다른 가게 보고 다시 오면 60%~70% 협상 쉬움.</li>
+          <li>작은돈(10,000동/20,000동/50,000동)을 따로 보관.</li>
+        </ul></div>
+      </details>
 
-    <details class="fold">
-      <summary>여행 팁 모아보기 · 날씨 / 복장</summary>
-      <div class="fold-body"><ul class="mini-list">
-        <li>나트랑은 기온보다 햇빛 세기를 더 조심하세요.</li>
-        <li>모자/선글라스/얇은 긴팔/미끄럽지 않은 신발 추천.</li>
-        <li>첫날과 마지막날은 무리한 일정을 피하세요.</li>
-        <li>물놀이는 오전 또는 해질 무렵이 더 편합니다.</li>
-        <li>물놀이 후 젖은 옷은 바로 갈아입으세요.</li>
-      </ul></div>
-    </details>
+      <details class="fold">
+        <summary>상황별 팁 · 더위/건강</summary>
+        <div class="fold-body"><ul class="mini-list">
+          <li>한낮(12~15시) 오래 걷지 않기.</li>
+          <li>모자/선글라스/얇은 긴팔/미끄럼 방지 신발 추천.</li>
+          <li>첫날·마지막날은 무리한 일정 금지.</li>
+        </ul></div>
+      </details>
 
-    <details class="fold">
-      <summary>여행 팁 모아보기 · 부모님 여행 꿀팁</summary>
-      <div class="fold-body"><ul class="mini-list">
-        <li>한 명만 Grab/지도/예약 담당하면 훨씬 편합니다.</li>
-        <li>호텔 주소/예약번호/가게 이름/지도 캡처를 미리 저장하세요.</li>
-        <li>영어 설명보다 지도 화면/예약 화면 보여주기가 빠릅니다.</li>
-        <li>공항은 3시간 전 출발이 가장 편합니다.</li>
-      </ul></div>
-    </details>
+      <details class="fold">
+        <summary>🇻🇳 나트랑 팁 문화, 이것만 기억하세요</summary>
+        <div class="fold-body"><ul class="mini-list">
+          <li>베트남은 팁 문화가 강하지 않지만, 필요한 곳은 소액 팁이 좋습니다.</li>
+          <li>마사지 60~90분 후 담당자에게 50,000동 1장, Tip Included면 생략.</li>
+          <li>호텔은 아침 외출 전 20,000동 1장, 짐 옮긴 직원도 20,000동 1장.</li>
+          <li>식당/카페, 택시/Grab은 팁 필수 아님. 잔돈 조금 안 받는 정도면 충분.</li>
+          <li>팁은 동전보다 지폐로 주는 것이 편합니다.</li>
+        </ul></div>
+      </details>
 
-    <details class="fold">
-      <summary>팁 문화 / 서비스 매너</summary>
-      <div class="fold-body">
-        <h3 style="font-size:0.98rem;margin:2px 0 8px;">🇻🇳 나트랑 팁 문화, 이것만 기억하세요</h3>
-        <ul class="mini-list">
-          <li>베트남은 팁 문화가 강한 편은 아니지만, 필요한 곳에만 소액을 주면 편합니다.</li>
-          <li><strong>마사지:</strong> 60분~90분 후 담당자에게 직접 <strong>50,000동</strong> 1장. 계산서에 Tip Included면 생략.</li>
-          <li><strong>호텔:</strong> 아침 외출 전 베개 위 <strong>20,000동</strong> 1장, 짐 옮겨준 직원에게도 <strong>20,000동</strong> 1장.</li>
-          <li><strong>안 줘도 되는 곳:</strong> 식당/카페, 택시/Grab. 잔돈 조금 안 받는 정도면 충분.</li>
-          <li><strong>한 줄 꿀팁:</strong> 팁은 동전보다 지폐로 주세요.</li>
-        </ul>
-      </div>
-    </details>
+      <details class="fold">
+        <summary>🇻🇳 2026 나트랑 야시장 가격 가이드</summary>
+        <div class="fold-body"><ul class="mini-list">
+          <li>신발/의류: 크록스(지비츠 포함) 160,000동~190,000동 / 코끼리 바지 60,000동~80,000동 / 원피스 100,000동~130,000동 / 운동복 80,000동~100,000동</li>
+          <li>먹거리 선물: 건망고(500g) 90,000동~110,000동 / 마카다미아(500g) 100,000동~120,000동 / 캐슈넛(500g) 110,000동~130,000동</li>
+          <li>가방/잡화: 라탄 가방 160,000동~200,000동 / 니트 가방 80,000동~110,000동 / 선글라스 100,000동~150,000동</li>
+        </ul></div>
+      </details>
 
-    <details class="fold">
-      <summary>실전 흥정 3단계</summary>
-      <div class="fold-body"><ul class="mini-list">
-        <li>1단계: 가격을 물어보고 처음 가격의 50% 정도부터 시작.</li>
-        <li>2단계: 안 되면 웃으면서 "노" 하고 천천히 다른 가게 보기.</li>
-        <li>3단계: 다시 부르면 60%~70% 선에서 맞춰보기.</li>
-        <li>너무 마음에 들면 70%~80% 선에서 마무리해도 괜찮습니다.</li>
-        <li>가격이 안 맞으면 그냥 나와도 됩니다.</li>
-        <li>비슷한 물건은 다른 가게에도 있을 가능성이 큽니다.</li>
-      </ul></div>
-    </details>
+      <section class="card">
+        <h2>체크리스트 (상황별)</h2>
+        <div class="check-group-title">출발 전</div>
+        <label class="check-item"><input type="checkbox" data-check="before_passport"><span class="check-text">여권 / 여권 사본 / 예약 확인서</span></label>
+        <label class="check-item"><input type="checkbox" data-check="before_grab"><span class="check-text">Grab 앱 / 결제수단 / 지도 캡처</span></label>
 
-    <details class="fold">
-      <summary>야시장 주의사항 카드</summary>
-      <div class="fold-body"><ul class="mini-list">
-        <li>지갑은 가방 안쪽에 넣고 가방은 앞으로 메기.</li>
-        <li>작은돈을 따로 빼서 결제하기.</li>
-        <li>야시장 입구보다 안쪽이 더 저렴할 수 있음.</li>
-        <li>한 번에 오래 보지 말고 30분~40분 정도 짧게 보기.</li>
-      </ul></div>
-    </details>
+        <div class="check-group-title">매일 아침</div>
+        <label class="check-item"><input type="checkbox" data-check="morning_water"><span class="check-text">물 / 모자 / 선크림 / 작은돈 챙기기</span></label>
+        <label class="check-item"><input type="checkbox" data-check="morning_route"><span class="check-text">첫 목적지 지도 열기 / 이동 시간 확인</span></label>
 
-    <details class="fold">
-      <summary>🇻🇳 2026 나트랑 야시장 가격 가이드</summary>
-      <div class="fold-body">
-        <ul class="mini-list">
-          <li>처음엔 비싸게 부를 수 있어 아래 가격 근처까지 흥정하는 기준으로 보세요.</li>
-          <li><strong>신발 / 의류:</strong> 크록스(지비츠 포함) 160,000동 ~ 190,000동 / 코끼리 바지 60,000동 ~ 80,000동 / 휴양지 원피스 100,000동 ~ 130,000동 / 나이키 운동복 80,000동 ~ 100,000동</li>
-          <li><strong>먹거리 선물:</strong> 건망고(500g) 90,000동 ~ 110,000동 / 마카다미아(500g) 100,000동 ~ 120,000동 / 캐슈넛(500g) 110,000동 ~ 130,000동</li>
-          <li><strong>가방 / 잡화:</strong> 라탄 가방(중형) 160,000동 ~ 200,000동 / 니트 그물 가방 80,000동 ~ 110,000동 / 선글라스 100,000동 ~ 150,000동</li>
-        </ul>
-      </div>
-    </details>
-
-    <details class="fold">
-      <summary>체크리스트</summary>
-      <div class="fold-body">
-        <label class="check-item"><input type="checkbox" data-check="passport"><span class="check-text">여권 / 여권 사본</span></label>
-        <label class="check-item"><input type="checkbox" data-check="ticket"><span class="check-text">항공권 / 호텔 예약 확인서</span></label>
-        <label class="check-item"><input type="checkbox" data-check="grab"><span class="check-text">Grab 앱 / 결제수단 확인</span></label>
-        <label class="check-item"><input type="checkbox" data-check="cash"><span class="check-text">현금 소액권 + 카드</span></label>
-        <label class="check-item"><input type="checkbox" data-check="med"><span class="check-text">상비약 / 개인 처방약</span></label>
-      </div>
-    </details>
+        <div class="check-group-title">리조트 이동 전 (Day3)</div>
+        <label class="check-item"><input type="checkbox" data-check="resort_checkout"><span class="check-text">체크아웃 짐 정리 / 분실물 확인</span></label>
+        <label class="check-item"><input type="checkbox" data-check="resort_car"><span class="check-text">Grab 7인승 필요 여부 확인 / 목적지 핀 확인</span></label>
+      </section>
+    </section>
   </main>
 
+  <div class="sticky-bar">
+    <div class="sticky-inner">
+      <div id="stickyDay" class="pill">Day0</div>
+      <div id="stickyNext" class="pill">다음: 공항 → 호텔 이동</div>
+      <a id="stickyHotel" class="icon-btn" href="https://maps.google.com/?q=Intercontinental+Nha+Trang" target="_blank" rel="noopener">호텔</a>
+      <a id="stickyMap" class="icon-btn" href="https://maps.google.com/?q=Intercontinental+Nha+Trang" target="_blank" rel="noopener">지도</a>
+      <button id="stickyCopy" class="icon-btn" style="cursor:pointer;">복사</button>
+    </div>
+  </div>
+
   <script>
-    const quickData = {
-      day0:{today:'도착 후 바로 휴식',stay:'InterContinental Nha Trang',move:'공항→호텔 Grab 약 40분 / 약 350,000동'},
-      day1:{today:'시내 여유 일정',stay:'InterContinental Nha Trang',move:'주요 이동 Grab 단거리'},
-      day2:{today:'관광 + 온천',stay:'InterContinental Nha Trang',move:'관광지 이동 + I-Resort'},
-      day3:{today:'리조트 이동일',stay:'Amiana Resort Nha Trang',move:'시내→아미아나 Grab 10분~15분 / 100,000동'},
-      day4:{today:'점심 + 쇼핑 마무리',stay:'Amiana Resort Nha Trang',move:'점심 후 쇼핑 동선 최소화'},
-      all:{today:'전체 일정 보기',stay:'Day별 숙소 확인',move:'핵심 이동만 체크'}
+    const tripData = {
+      day0: {
+        dayLabel: 'Day0',
+        title: 'Day0 새벽 도착',
+        sub: '도착 → 이동 → 체크인 → 바로 취침',
+        hotel: 'InterContinental Nha Trang',
+        hotelMap: 'https://maps.google.com/?q=Intercontinental+Nha+Trang',
+        summary: [
+          { k: '출발', v: '03:30 나트랑 도착' },
+          { k: '핵심', v: '04:30 공항→호텔 이동' },
+          { k: '식사', v: '별도 일정 없음' },
+          { k: '휴식', v: '05:30 체크인 후 취침' },
+          { k: '저녁', v: '컨디션 회복 우선' }
+        ],
+        items: [
+          {
+            time: '03:30',
+            place: '나트랑 도착',
+            line: '입국 후 바로 숙소 이동 준비',
+            badges: ['cat-move:도착'],
+            map: 'https://maps.google.com/?q=Cam+Ranh+International+Airport',
+            details: ['새벽 도착은 버스보다 택시/Grab이 덜 피곤합니다.']
+          },
+          {
+            time: '04:30',
+            place: '공항 → InterContinental 이동',
+            line: 'Grab 약 40분 / 약 350,000동',
+            badges: ['cat-move:이동', 'mini:Grab', 'mini:약 40분', 'mini:약 350,000동'],
+            map: 'https://maps.google.com/?q=Intercontinental+Nha+Trang',
+            details: ['Grab 또는 공식 택시 이용', '4명+캐리어면 큰 차 추천', '호텔 이름보다 지도 핀 보여주기']
+          },
+          {
+            time: '05:30',
+            place: '호텔 체크인 후 취침',
+            line: '전날 1박 예약이면 바로 쉬기 편함',
+            badges: ['cat-stay:숙소'],
+            map: 'https://maps.google.com/?q=Intercontinental+Nha+Trang',
+            details: ['체력 회복을 최우선으로 두세요.']
+          }
+        ]
+      },
+      day1: {
+        dayLabel: 'Day1',
+        title: 'Day1 시내 여유 일정',
+        sub: '점심 → 네일 → 마사지 → 저녁 → 야시장',
+        hotel: 'InterContinental Nha Trang',
+        hotelMap: 'https://maps.google.com/?q=Intercontinental+Nha+Trang',
+        summary: [
+          { k: '출발', v: '10:30 기상' },
+          { k: '핵심', v: '16:00 네일 + 17:30 마사지' },
+          { k: '식사', v: '12:00 짜오마오1 / 18:30 꽌옥응엉' },
+          { k: '휴식', v: '이동 최소화' },
+          { k: '저녁', v: '20:00 야시장 30~40분' }
+        ],
+        items: [
+          { time:'10:30', place:'기상 & 준비', line:'무리하지 않고 천천히 시작', badges:['cat-stay:휴식'], map:'https://maps.google.com/?q=Intercontinental+Nha+Trang', details:['첫날은 과하게 움직이지 않기'] },
+          {
+            time:'12:00',
+            place:'짜오마오1 (Chào Mào) 점심',
+            line:'1인 35,000동~250,000동 / 가정식 인기',
+            badges:['cat-meal:식사','mini:반쎄오 120,000동','mini:미꽝 100,000동'],
+            map:'https://maps.google.com/?q=Chao+Mao+Nha+Trang',
+            details:['주소: 166 Đ. Mê Linh, Tân Tiến, Nha Trang','영업: 보통 11:00~22:00 (일부 브레이크 11:30~15:00 / 17:30~21:30)','4명이면 메인 3~4개 먼저 주문']
+          },
+          { time:'16:00', place:'니에나 네일', line:'젤 250,000동~400,000동 / 약 1시간', badges:['cat-spa:네일','mini:약 1시간'], map:'https://maps.google.com/?q=Niena+Nails+Nha+Trang', details:['디자인 사진 미리 저장해서 보여주기'] },
+          {
+            time:'17:30', place:'Onsi Spa 마사지', line:'발 250,000동 / 전신 350,000동~450,000동', badges:['cat-spa:마사지','mini:60~90분'], map:'https://maps.google.com/?q=Onsi+Spa+Nha+Trang',
+            details:['강도는 soft 또는 medium 요청','예약 추천','팁은 보통 50,000동 (Tip Included면 생략)']
+          },
+          {
+            time:'18:30', place:'꽌옥응엉 저녁', line:'보통 50,000동~150,000동 / 접시', badges:['cat-meal:해산물','mini:약 1시간'], map:'https://maps.google.com/?q=Quan+Oc+Ngon+Nha+Trang',
+            details:['주소: 34/2/15 Nguyễn Thiện Thuật, Tân Tiến, Nha Trang','추천: Ốc len xào dừa 80,000동 · Hàu nướng phô mai 90,000동 · Ốc mỡ cháy tỏi 80,000동 · Nghêu hấp sả 70,000동 · 볶음밥 100,000동','4명 기준 5~6접시 + 볶음밥']
+          },
+          {
+            time:'20:00', place:'Nha Trang Night Market', line:'30~40분 짧게 보기', badges:['cat-shop:쇼핑','mini:흥정 시작 50%~70%'], map:'https://maps.google.com/?q=Nha+Trang+Night+Market+Tran+Phu',
+            details:['주소: 46 Tran Phu Street','처음 가격 그대로 사지 않기','지갑은 안쪽, 가방은 앞으로 메기']
+          }
+        ]
+      },
+      day2: {
+        dayLabel: 'Day2',
+        title: 'Day2 관광 + 온천',
+        sub: '사원 → 혼총곶 → 점심 → 온천 → 저녁',
+        hotel: 'InterContinental Nha Trang',
+        hotelMap: 'https://maps.google.com/?q=Intercontinental+Nha+Trang',
+        summary: [
+          { k: '출발', v: '09:00 포나가르 사원' },
+          { k: '핵심', v: '14:00 I-Resort 머드온천 3시간' },
+          { k: '식사', v: 'Cui Seafood / Mix Greek' },
+          { k: '휴식', v: '온천으로 체력 회복' },
+          { k: '저녁', v: '18:30 저녁 후 조기 귀가' }
+        ],
+        items: [
+          { time:'09:00', place:'포나가르 사원', line:'입장 30,000동 / 약 1시간', badges:['cat-tour:관광','mini:입장 30,000동'], map:'https://maps.google.com/?q=Po+Nagar+Cham+Towers', details:['노출 많은 옷은 입장 제한 가능'] },
+          { time:'10:30', place:'혼총곶', line:'입장 22,000동 / 약 30분', badges:['cat-tour:관광','mini:입장 22,000동'], map:'https://maps.google.com/?q=Hon+Chong+Promontory', details:['사진 스팟 중심으로 짧게'] },
+          { time:'12:00', place:'Cui Seafood 점심', line:'버터새우 220,000동 · 볶음밥 120,000동 · 조개찜 180,000동', badges:['cat-meal:식사'], map:'https://maps.google.com/?q=Cui+Seafood+Nha+Trang', details:['메인 3~4개 + 볶음밥/면 1개가 적당'] },
+          { time:'14:00', place:'I-Resort 머드온천', line:'머드온천 350,000동 / Private 800,000동 / 약 3시간', badges:['cat-spa:온천','mini:약 3시간'], map:'https://maps.google.com/?q=I+Resort+Nha+Trang', details:['수건/샤워용품 제공'] },
+          { time:'18:30', place:'Mix Greek Restaurant 저녁', line:'양고기 350,000동 · 샐러드 120,000동 · 피타 80,000동', badges:['cat-meal:식사'], map:'https://maps.google.com/?q=Mix+Greek+Restaurant+Nha+Trang', details:['첫날보다 무리 없는 식사량 유지'] }
+        ]
+      },
+      day3: {
+        dayLabel: 'Day3',
+        title: 'Day3 리조트 이동일',
+        sub: '시내 → 아미아나 이동 + 체크인 + 리조트 저녁',
+        hotel: 'Amiana Resort Nha Trang',
+        hotelMap: 'https://maps.google.com/?q=Amiana+Resort+Nha+Trang',
+        summary: [
+          { k: '출발', v: '10:30 리조트 이동' },
+          { k: '핵심', v: '14:00 아미아나 체크인' },
+          { k: '식사', v: '18:30 Bacaro 저녁' },
+          { k: '휴식', v: '라군 비치/선셋 18:00' },
+          { k: '저녁', v: '리조트에서 천천히 마무리' }
+        ],
+        items: [
+          { time:'10:30', place:'시내 → 아미아나 이동', line:'Grab 10~15분 / 약 100,000동', badges:['cat-move:숙소 이동','mini:약 100,000동'], map:'https://maps.google.com/?q=Amiana+Resort+Nha+Trang', details:['체크아웃 전 분실물 최종 확인'] },
+          { time:'14:00', place:'아미아나 체크인', line:'체크인 전/후 시설 사용 가능 여부 확인', badges:['cat-stay:숙소'], map:'https://maps.google.com/?q=Amiana+Resort+Nha+Trang', details:['라군 비치 추천','선셋 18:00 확인','젖은 옷 오래 입지 않기'] },
+          { time:'18:30', place:'Bacaro Restaurant 저녁', line:'피자 280,000동 · 파스타 240,000동 · 스테이크 600,000동', badges:['cat-meal:식사'], map:'https://maps.google.com/?q=Bacaro+Amiana+Resort', details:['과식보다 가볍게 나눠 주문'] }
+        ]
+      },
+      day4: {
+        dayLabel: 'Day4',
+        title: 'Day4 점심 + 쇼핑',
+        sub: '확정 일정만 간단히 마무리',
+        hotel: 'Amiana Resort Nha Trang',
+        hotelMap: 'https://maps.google.com/?q=Amiana+Resort+Nha+Trang',
+        summary: [
+          { k: '출발', v: '11:30 쿠우쿠우 점심' },
+          { k: '핵심', v: '12:30 롯데마트 쇼핑' },
+          { k: '식사', v: '점심 약 300,000동~400,000동' },
+          { k: '휴식', v: '무리 없는 짧은 동선' },
+          { k: '저녁', v: '확정 일정 종료' }
+        ],
+        items: [
+          { time:'11:30', place:'쿠우쿠우 점심', line:'약 300,000동~400,000동', badges:['cat-meal:식사'], map:'https://maps.google.com/?q=QooQoo+Gold+Coast+Mall+Nha+Trang', details:['점심시간 웨이팅 가능'] },
+          { time:'12:30', place:'롯데마트 쇼핑', line:'커피 120,000동 · 망고젤리 80,000동 · 코코넛과자 70,000동', badges:['cat-shop:쇼핑'], map:'https://maps.google.com/?q=Lotte+Mart+Gold+Coast+Nha+Trang', details:['작은돈 분리 보관 후 결제'] }
+        ]
+      }
     };
 
-    const summaryData = {
-      day0:[
-        {k:'출발',v:'03:30 나트랑 도착'},
-        {k:'핵심',v:'04:30 Grab 이동'},
-        {k:'식사',v:'별도 일정 없음'},
-        {k:'휴식',v:'05:30 체크인 후 취침'},
-        {k:'저녁',v:'컨디션 회복'}
-      ],
-      day1:[
-        {k:'출발',v:'10:30 기상'},
-        {k:'핵심',v:'네일 + 마사지'},
-        {k:'식사',v:'12:00 짜오마오1 / 18:30 꽌옥응엉'},
-        {k:'휴식',v:'이동 최소화'},
-        {k:'저녁',v:'20:00 야시장'}
-      ],
-      day2:[
-        {k:'출발',v:'09:00 포나가르'},
-        {k:'핵심',v:'14:00 머드온천 3시간'},
-        {k:'식사',v:'Cui / Mix Greek'},
-        {k:'휴식',v:'온천 시간 활용'},
-        {k:'저녁',v:'18:30 저녁'}
-      ],
-      day3:[
-        {k:'출발',v:'10:30 리조트 이동'},
-        {k:'핵심',v:'14:00 체크인'},
-        {k:'식사',v:'18:30 Bacaro'},
-        {k:'휴식',v:'라군 비치/선셋'},
-        {k:'저녁',v:'리조트 마무리'}
-      ],
-      day4:[
-        {k:'출발',v:'11:30 점심'},
-        {k:'핵심',v:'12:30 쇼핑'},
-        {k:'식사',v:'쿠우쿠우'},
-        {k:'휴식',v:'동선 간단'},
-        {k:'저녁',v:'확정 일정 종료'}
-      ],
-      all:[
-        {k:'출발',v:'Day0 도착'},
-        {k:'핵심',v:'Day1~4 핵심만 확인'},
-        {k:'식사',v:'Day1 식당 업데이트 반영'},
-        {k:'휴식',v:'무리 없는 동선'},
-        {k:'저녁',v:'Day별 조기 마무리'}
-      ]
+    const dayOrder = ['day0','day1','day2','day3','day4'];
+
+    const mainTabs = document.querySelectorAll('.tab-btn');
+    const sections = {
+      today: document.getElementById('section-today'),
+      byday: document.getElementById('section-byday'),
+      full: document.getElementById('section-full'),
+      essentials: document.getElementById('section-essentials')
     };
 
-    const buttons = document.querySelectorAll('.day-btn');
-    const sections = document.querySelectorAll('.day-section');
-    const summary = document.getElementById('todaySummary');
-    const quick = document.getElementById('todayQuick');
-    const todayStay = document.getElementById('todayStay');
+    const dayButtons = document.querySelectorAll('.day-btn');
+    const bydayWrap = document.getElementById('bydayWrap');
+    const fullWrap = document.getElementById('fullWrap');
+    const todaySummary = document.getElementById('todaySummary');
+    const todayTimeline = document.getElementById('todayTimeline');
+    const qaTodayPlan = document.getElementById('qaTodayPlan');
+    const qaHotel = document.getElementById('qaHotel');
+    const qaHotelMap = document.getElementById('qaHotelMap');
+    const todayMapBtn = document.getElementById('todayMapBtn');
 
-    function renderSummary(day){
-      summary.innerHTML='';
-      summaryData[day].forEach(item=>{
-        const el=document.createElement('div');
-        el.className='summary-card';
-        el.innerHTML=`<div class="summary-k">${item.k}</div><div class="summary-v">${item.v}</div>`;
-        summary.appendChild(el);
-      });
+    const stickyDay = document.getElementById('stickyDay');
+    const stickyNext = document.getElementById('stickyNext');
+    const stickyHotel = document.getElementById('stickyHotel');
+    const stickyMap = document.getElementById('stickyMap');
+
+    let currentDay = localStorage.getItem('selectedDayPlan') || 'day0';
+    if(!tripData[currentDay] && currentDay !== 'all') currentDay = 'day0';
+
+    function badgeHtml(token){
+      const [klass, text] = token.split(':');
+      return `<span class="badge ${klass}">${text}</span>`;
     }
 
-    function renderQuick(day){
-      const d=quickData[day];
-      quick.innerHTML=`
-        <div class="quick-item"><div class="quick-label">오늘 일정</div><div class="quick-value">${d.today}</div></div>
-        <div class="quick-item"><div class="quick-label">오늘 숙소</div><div class="quick-value">${d.stay}</div></div>
-        <div class="quick-item"><div class="quick-label">핵심 이동</div><div class="quick-value">${d.move}</div></div>`;
-      todayStay.textContent = (day==='day3' || day==='day4') ? 'Amiana Resort Nha Trang' : 'InterContinental Nha Trang';
-      document.getElementById('breakfastRow').style.display = (day==='day3' || day==='day4') ? 'none' : 'block';
+    function itemCardHtml(item){
+      const details = item.details && item.details.length
+        ? `<details class="acc"><summary>자세히 보기</summary><div class="acc-body"><ul>${item.details.map(d=>`<li>${d}</li>`).join('')}</ul></div></details>`
+        : '';
+      return `
+      <article class="item">
+        <div class="item-top"><span class="time">${item.time}</span><div class="place">${item.place}</div></div>
+        <p class="line">${item.line}</p>
+        <div class="badges">${item.badges.map(badgeHtml).join('')}</div>
+        <div class="btn-row"><a class="btn primary" href="${item.map}" target="_blank" rel="noopener">Open Map</a></div>
+        ${details}
+      </article>`;
     }
 
-    function setDay(day){
-      buttons.forEach(btn=>{
-        const active = btn.dataset.day===day;
+    function dayBlockHtml(dayKey){
+      const d = tripData[dayKey];
+      return `
+        <section class="schedule-wrap visible" data-day="${dayKey}">
+          <div class="day-head"><div class="day-title">${d.dayLabel} · ${d.title}</div><div class="day-sub">${d.sub}</div></div>
+          <div class="timeline">${d.items.map(itemCardHtml).join('')}</div>
+        </section>`;
+    }
+
+    function renderByDay(selected){
+      bydayWrap.innerHTML = '';
+      if(selected === 'all'){
+        bydayWrap.innerHTML = dayOrder.map(dayBlockHtml).join('');
+      } else {
+        bydayWrap.innerHTML = dayBlockHtml(selected);
+      }
+    }
+
+    function renderFull(){
+      fullWrap.innerHTML = dayOrder.map(dayBlockHtml).join('');
+    }
+
+    function renderToday(dayKey){
+      const d = tripData[dayKey];
+      todaySummary.innerHTML = d.summary.map(s=>`<div class="summary-card"><div class="summary-k">${s.k}</div><div class="summary-v">${s.v}</div></div>`).join('');
+      todayTimeline.innerHTML = d.items.map(itemCardHtml).join('');
+
+      qaTodayPlan.textContent = `${d.dayLabel} · ${d.sub}`;
+      qaHotel.textContent = d.hotel;
+      qaHotelMap.href = d.hotelMap;
+      todayMapBtn.href = d.items[0]?.map || d.hotelMap;
+
+      stickyDay.textContent = d.dayLabel;
+      stickyNext.textContent = `다음: ${d.items[0]?.time || ''} ${d.items[0]?.place || ''}`;
+      stickyHotel.href = d.hotelMap;
+      stickyMap.href = d.items[0]?.map || d.hotelMap;
+    }
+
+    function setDay(dayKey){
+      currentDay = dayKey;
+      localStorage.setItem('selectedDayPlan', dayKey);
+      dayButtons.forEach(btn=>{
+        const active = btn.dataset.day === dayKey;
         btn.classList.toggle('active', active);
         btn.setAttribute('aria-selected', active ? 'true':'false');
       });
-
-      sections.forEach(sec=>{
-        if(day==='all') sec.classList.add('visible');
-        else sec.classList.toggle('visible', sec.dataset.day===day);
-      });
-
-      renderQuick(day);
-      renderSummary(day);
-      localStorage.setItem('selectedDayPlan', day);
+      const useDay = dayKey === 'all' ? 'day0' : dayKey;
+      renderToday(useDay);
+      renderByDay(dayKey);
     }
 
-    buttons.forEach(btn=>btn.addEventListener('click', ()=>setDay(btn.dataset.day)));
+    function setTab(tabKey){
+      mainTabs.forEach(btn=>{
+        const active = btn.dataset.tab === tabKey;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-selected', active ? 'true':'false');
+      });
+      Object.entries(sections).forEach(([key,el])=> el.classList.toggle('active', key===tabKey));
+    }
 
-    const saved = localStorage.getItem('selectedDayPlan');
-    if(saved && summaryData[saved]) setDay(saved); else setDay('day0');
+    mainTabs.forEach(btn=>btn.addEventListener('click', ()=> setTab(btn.dataset.tab)));
+    dayButtons.forEach(btn=>btn.addEventListener('click', ()=> setDay(btn.dataset.day)));
+
+    renderFull();
+    setDay(currentDay);
+    setTab('today');
 
     const checks = document.querySelectorAll('input[type="checkbox"][data-check]');
     checks.forEach(chk=>{
       const key = 'check_' + chk.dataset.check;
-      chk.checked = localStorage.getItem(key)==='1';
-      chk.addEventListener('change', ()=>localStorage.setItem(key, chk.checked ? '1':'0'));
+      chk.checked = localStorage.getItem(key) === '1';
+      chk.addEventListener('change', ()=> localStorage.setItem(key, chk.checked ? '1':'0'));
     });
 
-    const copyBtn = document.getElementById('copyImportant');
+    const copyImportant = document.getElementById('copyImportant');
     const copyMsg = document.getElementById('copyMsg');
     const importantText = document.getElementById('importantText');
-    copyBtn.addEventListener('click', async()=>{
-      try{
-        await navigator.clipboard.writeText(importantText.innerText.trim());
-        copyMsg.textContent='복사 완료!';
-        setTimeout(()=>copyMsg.textContent='', 1600);
-      }catch(e){
-        copyMsg.textContent='복사 실패: 길게 눌러 수동 복사';
-      }
+    function writeCopy(text){
+      navigator.clipboard.writeText(text).then(()=>{
+        copyMsg.textContent = '복사 완료!';
+        setTimeout(()=>copyMsg.textContent='',1500);
+      }).catch(()=>{copyMsg.textContent='복사 실패';});
+    }
+    copyImportant.addEventListener('click', ()=> writeCopy(importantText.innerText.trim()));
+    document.getElementById('stickyCopy').addEventListener('click', ()=> writeCopy(importantText.innerText.trim()));
+
+    document.getElementById('copyToday').addEventListener('click', ()=>{
+      const d = tripData[currentDay === 'all' ? 'day0' : currentDay];
+      const text = `${d.dayLabel} ${d.title}\n` + d.items.map(i=>`${i.time} ${i.place} / ${i.line}`).join('\n');
+      writeCopy(text);
     });
   </script>
 </body>
